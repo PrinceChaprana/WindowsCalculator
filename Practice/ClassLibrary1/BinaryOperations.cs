@@ -1,8 +1,10 @@
-﻿using ArthimaticOperations;
-public class BinaryOperations : IOperations
+﻿using System;
+
+namespace ArthimaticOperations
 {
-    public void evaluate(string expression)
+    public class BinaryOperations : IOperations
     {
-        throw new NotImplementedException();
+        
     }
+
 }
