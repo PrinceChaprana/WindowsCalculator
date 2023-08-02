@@ -1,4 +1,4 @@
 ﻿interface IOperations
 {
-    double evaluate();
+    double Evaluate(double[] numbers);
 }

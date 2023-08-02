@@ -3,8 +3,13 @@ using System;
 
 public class SumOperation : BinaryOperation
 {
-    public override double evaluate()
+    public override double EvaluateCore(double[] numbers)
     {
-        throw new NotImplementedException();
+        double sum = 0;
+        foreach (var number in numbers)
+        {
+            sum+= number;
+        }
+        return sum;
     }
 }

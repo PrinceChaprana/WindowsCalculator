@@ -3,8 +3,13 @@ using System;
 
 public class SubtractOperation : BinaryOperation
 {
-    public override double evaluate()
+    public override double EvaluateCore(double[] numbers)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        foreach (var number in numbers)
+        {
+            result -= number;
+        }
+        return result;
     }
 }

@@ -3,7 +3,7 @@ using System;
 
 public class ProductOperation : BinaryOperation
 {
-    public override double evaluate()
+    public override double EvaluateCore(double[] numbers)
     {
         throw new NotImplementedException();
     }
