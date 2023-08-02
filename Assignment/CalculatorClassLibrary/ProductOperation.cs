@@ -3,8 +3,12 @@ using System;
 
 public class ProductOperation : BinaryOperation
 {
-    public override double EvaluateCore(double[] numbers)
+    protected override double EvaluateCore(double[] numbers)
     {
-        throw new NotImplementedException();
+        double result = 1;
+        double number1 = numbers[0];
+        double number2 = numbers[1];
+        result = number1 * number2;
+        return result;
     }
 }

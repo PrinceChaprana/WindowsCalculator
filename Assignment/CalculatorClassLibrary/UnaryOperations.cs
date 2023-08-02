@@ -1,20 +1,21 @@
 ﻿using System;
-
+using OperationInterface;
 namespace UnaryOperations
 {
-    public abstract class UnaryOperation : IOperations
+    public abstract class UnaryOperation : IOperation
     {
+        public int OperandCount { get; set; }
+        public int Precedence { get; set; }
+
         public double Evaluate(double[] numbers)
         {
-            if(numbers.Length >= 1)
+            if(numbers.Length > 1 || numbers.Length < 1)
             {
-                return EvaluateCore(numbers);
+                throw new ArgumentException("More or Less than Number of Arguments");
             }
             //TODO: have to return a value for the error
-            return -1;
+            return EvaluateCore(numbers);
         }
-        public abstract double EvaluateCore(double[] numbers);
-
-        public UnaryOperation() { }
+        protected abstract double EvaluateCore(double[] numbers);
     }
 }

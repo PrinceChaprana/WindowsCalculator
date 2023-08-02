@@ -1,22 +1,27 @@
-﻿using System;
+﻿using OperationInterface;
+using System;
 
 namespace BinaryOperations
 {
-    public abstract class BinaryOperation : IOperations
+    public abstract class BinaryOperation : IOperation
     {
         public BinaryOperation() { }
 
+        public int OperandCount { get; set; }
+        public int Precedence { get; set; }
+
         public double Evaluate(double[] numbers)
         {
-            if (numbers.Length >= 2)
+           
+            if (numbers.Length < 2 || numbers.Length > 2)
             {
-                return EvaluateCore(numbers);
+                throw new ArgumentException("More or Less than sufficent number of Arguments");
             }
             //Issue : What should we return if the numbers are less than zero
-            return -1;
+            return EvaluateCore(numbers);
         }
 
-        public abstract double EvaluateCore(double[] numbers);
+        protected abstract double EvaluateCore(double[] numbers);
         
     }
 }

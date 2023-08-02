@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64AEF550-2ED3-449D-9F1E-D1906099850D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CalculatorClassLibrary</RootNamespace>
-    <AssemblyName>CalculatorClassLibrary</AssemblyName>
+    <ProjectGuid>{5320144D-A3C8-4D11-B62F-59B4372892B1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TesterConsoleWindow</RootNamespace>
+    <AssemblyName>TesterConsoleWindow</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,19 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluator.cs" />
-    <Compile Include="PostfixConvertor.cs" />
-    <Compile Include="PostfixEvaluator.cs" />
-    <Compile Include="ReciprocalOpertion.cs" />
-    <Compile Include="SquareRootOperation.cs" />
-    <Compile Include="SumOperation.cs" />
-    <Compile Include="BinaryOperations.cs" />
-    <Compile Include="DivideOperation.cs" />
-    <Compile Include="IOperation.cs" />
-    <Compile Include="ProductOperation.cs" />
+    <Compile Include="AddOperation.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubtractOperation.cs" />
-    <Compile Include="UnaryOperations.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
