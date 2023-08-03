@@ -42,19 +42,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArthimaticOperation\DivideOperation.cs" />
+    <Compile Include="ArthimaticOperation\ProductOperation.cs" />
+    <Compile Include="ArthimaticOperation\SubtractOperation.cs" />
+    <Compile Include="ArthimaticOperation\SumOperation.cs" />
     <Compile Include="Evaluator.cs" />
+    <Compile Include="Interfaces\IOperation.cs" />
+    <Compile Include="Operations\BinaryOperations.cs" />
+    <Compile Include="Operations\UnaryOperations.cs" />
+    <Compile Include="OperatorInfo.cs" />
     <Compile Include="PostfixConvertor.cs" />
-    <Compile Include="PostfixEvaluator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ReciprocalOpertion.cs" />
     <Compile Include="SquareRootOperation.cs" />
-    <Compile Include="SumOperation.cs" />
-    <Compile Include="BinaryOperations.cs" />
-    <Compile Include="DivideOperation.cs" />
-    <Compile Include="IOperation.cs" />
-    <Compile Include="ProductOperation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubtractOperation.cs" />
-    <Compile Include="UnaryOperations.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="TokenType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TrignometricOperations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

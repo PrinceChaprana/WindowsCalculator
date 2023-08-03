@@ -1,4 +1,0 @@
-﻿interface IOperations
-{
-    double evaluate();
-}

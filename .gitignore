@@ -1,9 +1,7 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-.vs
-obj
-bin
+﻿.vs
+obj/
+bin/
+packages/
 /Assignment/CalculatorClassLibrary/obj/Debug
 /Assignment/CalculatorClassLibrary/.vs/CalculatorClassLibrary/v17/.suo
 /Assignment/CalculatorClassLibrary/.vs/CalculatorClassLibrary/FileContentIndex/460541d2-cba5-4ee0-afd3-e15657b8821a.vsidx

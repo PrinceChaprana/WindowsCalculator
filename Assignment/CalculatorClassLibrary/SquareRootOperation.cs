@@ -1,11 +1,10 @@
-﻿
-using System;
-using UnaryOperations;
+﻿using System;
 
-public class SquareRootOpertions : UnaryOperation
+namespace CalculatorClassLibrary.ArthimaticOperation
 {
-    public override double EvaluateCore(double[] numbers)
+    public class SquareRootOpertions : UnaryOperation
     {
-        throw new NotImplementedException();
+        protected override double EvaluateCore(double[] numbers) => throw new NotImplementedException();
     }
 }
+
