@@ -1,7 +1,7 @@
-﻿using OperationInterface;
+﻿using CalculatorClassLibrary.Properties;
 using System;
 
-namespace BinaryOperations
+namespace CalculatorClassLibrary
 {
     public abstract class BinaryOperation : IOperation
     {
@@ -15,7 +15,7 @@ namespace BinaryOperations
            
             if (numbers.Length < 2 || numbers.Length > 2)
             {
-                throw new ArgumentException("More or Less than sufficent number of Arguments");
+                throw new ArgumentException(Resources.MoreOrLessOperands);
             }
             //Issue : What should we return if the numbers are less than zero
             return EvaluateCore(numbers);

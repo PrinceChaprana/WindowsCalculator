@@ -1,4 +1,4 @@
-﻿namespace OperationInterface
+﻿namespace CalculatorClassLibrary
 {
     interface IOperation
     {

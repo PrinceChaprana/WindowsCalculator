@@ -2,11 +2,14 @@
 
 namespace CalculatorClassLibrary.ArthimaticOperation
 {
-    public class ReciprocalOpertion : UnaryOperation
+    public class SumOperation : BinaryOperation
     {
         protected override double EvaluateCore(double[] numbers)
         {
-            throw new NotImplementedException();
+            double number1 = numbers[0];
+            double number2 = numbers[1];
+            return (number1 + number2);
         }
     }
+
 }

@@ -1,6 +1,5 @@
 ﻿using System;
-using OperationInterface;
-namespace UnaryOperations
+namespace CalculatorClassLibrary
 {
     public abstract class UnaryOperation : IOperation
     {
@@ -11,7 +10,7 @@ namespace UnaryOperations
         {
             if(numbers.Length > 1 || numbers.Length < 1)
             {
-                throw new ArgumentException("More or Less than Number of Arguments");
+                throw new ArgumentException(Properties.Resources.MoreOrLessOperands);
             }
             //TODO: have to return a value for the error
             return EvaluateCore(numbers);

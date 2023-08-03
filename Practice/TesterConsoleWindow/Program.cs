@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CalculatorClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ namespace TesterConsoleWindow
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void jj()
         {
             string className = "Add";
             
@@ -29,5 +31,16 @@ namespace TesterConsoleWindow
             
             Console.WriteLine(result);
         }
+
+        static int Main(string[] args)
+        {
+            Evaluator evaluator = new Evaluator();
+            List<string> result = evaluator.Evaluate("1");
+            Console.ReadLine();
+            return 0;
+        }
     }
 }
+
+//https://en.wikipedia.org/wiki/Order_of_operations
+//preceedence table https://pythongeeks.org/python-operator-precedence/

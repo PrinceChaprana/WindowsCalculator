@@ -1,84 +1,77 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-public static class PostfixConvertor
+namespace CalculatorClassLibrary
 {
-    //return the precedence 
-    //TODO: need to put in a xml or Json file
-    internal static int Prec(char ch)
+    public static class PostfixConvertor
     {
-        if (Evaluator.operatorMap.ContainsKey(""+ch))
+        public static int GetPrecedence(Token token)
         {
-            return Evaluator.operatorMap["" + ch].precedence;
+            if(Evaluator.OperatorMap.Count == 0)
+            {
+                Evaluator.InitilizeOpertorDictionary();
+            }
+
+            if (Evaluator.OperatorMap.ContainsKey(token.Value))
+            {
+                return Evaluator.OperatorMap[token.Value].Precedence;
+            }
+
+            return -1;
         }
-        return -1;
-    }
-
-    public static string InfixToPostfix(string exp)
-    {
-        // Initializing empty String for result
-        string result = "";
-
-        // Initializing empty stack
-        Stack<char> stack = new Stack<char>();
-
-        for (int i = 0; i < exp.Length; ++i)
+               
+        public static List<Token> Convertor(List<Token> infixExpression)
         {
-            char c = exp[i];
+            Stack<Token> operatorStack = new Stack<Token> ();
+            List<Token> outputList = new List<Token> ();
 
-            // If the scanned character is an
-            // operand, add it to output.
-            if (char.IsLetterOrDigit(c))
+            foreach(var token in  infixExpression)
             {
-                result += c;
-            }
-
-            // If the scanned character is an '(',
-            // push it to the stack.
-            else if (c == '(')
-            {
-                stack.Push(c);
-            }
-
-            // If the scanned character is an ')',
-            // pop and output from the stack
-            // until an '(' is encountered.
-            else if (c == ')')
-            {
-                while (stack.Count > 0
-                       && stack.Peek() != '(')
+                //if its a number
+                if (token.TokenType == TokenTypeEnum.OPERAND)
                 {
-                    result += stack.Pop();
-                }
-
-                if (stack.Count > 0
-                    && stack.Peek() != '(')
+                    outputList.Add (token);
+                }else if (token.TokenType == TokenTypeEnum.OPENPARENTHESIS)
                 {
-                    return "Invalid Expression";
+                    //if left parenthisis
+                    operatorStack.Push(token);
+                }else if (token.TokenType == TokenTypeEnum.CLOSEDPARENTHESIS)
+                {
+                    while(operatorStack.Count > 0 
+                        && !(operatorStack.Peek().TokenType == TokenTypeEnum.OPENPARENTHESIS))
+                    {
+                        outputList.Add(operatorStack.Pop());
+                    }
+                    //delete extra (
+                    operatorStack.Pop();
+                    //check for function to return the call like trignometric
+                    try
+                    {
+                        if (token.TokenType == TokenTypeEnum.FUNCTION)
+                            outputList.Add(operatorStack.Pop());
+                    }catch(ArgumentException e)
+                    {
+                        //Unhandled Exception
+                        Console.WriteLine(e);
+                    }
                 }
                 else
                 {
-                    stack.Pop();
+                    while(operatorStack.Count > 0 
+                        && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek()))
+                    {
+                        outputList.Add(operatorStack.Pop());
+                    }
+                    operatorStack.Push (token);
                 }
             }
 
-            // An operator is encountered
-            else
+            while(operatorStack.Count > 0)
             {
-                while (stack.Count > 0
-                       && Prec(c) <= Prec(stack.Peek()))
-                {
-                    result += stack.Pop();
-                }
-                stack.Push(c);
+                outputList.Add(operatorStack.Pop());
             }
-        }
 
-        // Pop all the operators from the stack
-        while (stack.Count > 0)
-        {
-            result += stack.Pop();
+            return outputList;
         }
-
-        return result;
     }
 }
