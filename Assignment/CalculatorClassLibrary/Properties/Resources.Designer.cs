@@ -61,6 +61,15 @@ namespace CalculatorClassLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evaluate.
+        /// </summary>
+        internal static string EvaluatorMethod {
+            get {
+                return ResourceManager.GetString("EvaluatorMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type of Token is not defiend.
         /// </summary>
         internal static string InvalidToken {
@@ -75,6 +84,15 @@ namespace CalculatorClassLibrary.Properties {
         internal static string MoreOrLessOperands {
             get {
                 return ResourceManager.GetString("MoreOrLessOperands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Value of the number is Not Defined.
+        /// </summary>
+        internal static string NotDefinedValue {
+            get {
+                return ResourceManager.GetString("NotDefinedValue", resourceCulture);
             }
         }
     }

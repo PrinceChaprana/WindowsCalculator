@@ -3,7 +3,7 @@ using System;
 
 namespace CalculatorClassLibrary
 {
-    public abstract class BinaryOperation : IOperation
+    internal abstract class BinaryOperation : IOperation
     {
         public BinaryOperation() { }
 

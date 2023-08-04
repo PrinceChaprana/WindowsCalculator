@@ -1,5 +1,6 @@
 ﻿namespace CalculatorClassLibrary
-{    public enum TokenTypeEnum
+{
+    public enum TokenTypeEnum
     {
         OPERAND,
         OPERATOR,

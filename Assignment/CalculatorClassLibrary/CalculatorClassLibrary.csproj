@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Practice\TesterConsole\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,9 +51,12 @@
     <Compile Include="ArthimaticOperation\SumOperation.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Interfaces\IOperation.cs" />
-    <Compile Include="Operations\BinaryOperations.cs" />
-    <Compile Include="Operations\UnaryOperations.cs" />
+    <Compile Include="Operations\BinaryOperation.cs" />
+    <Compile Include="Operations\TrignometricOperation.cs" />
+    <Compile Include="Operations\UnaryOperation.cs" />
+    <Compile Include="OperatorData.cs" />
     <Compile Include="OperatorInfo.cs" />
+    <Compile Include="PostfixCalculator.cs" />
     <Compile Include="PostfixConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -58,8 +64,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReciprocalOpertion.cs" />
-    <Compile Include="SquareRootOperation.cs" />
+    <Compile Include="TrignometricOperations\CosecOperation.cs" />
+    <Compile Include="TrignometricOperations\CosOperation.cs" />
+    <Compile Include="TrignometricOperations\CotOperation.cs" />
+    <Compile Include="TrignometricOperations\SecOperation.cs" />
+    <Compile Include="TrignometricOperations\SinOperation.cs" />
+    <Compile Include="TrignometricOperations\TanOperation.cs" />
+    <Compile Include="UnaryOperations\ReciprocalOpertion.cs" />
+    <Compile Include="UnaryOperations\SquareOperation.cs" />
+    <Compile Include="UnaryOperations\SquareRootOperation.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="TokenType.cs" />
   </ItemGroup>
@@ -70,7 +83,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TrignometricOperations\" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Properties\OperatorJson.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

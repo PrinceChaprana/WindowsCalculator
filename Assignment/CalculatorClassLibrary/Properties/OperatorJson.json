@@ -1,0 +1,106 @@
+[
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.SumOperation",
+      "OperandCount": 2,
+      "Precedence": 1
+    },
+    "OperatorSymbol": "+"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.SubtractOperation",
+      "OperandCount": 2,
+      "Precedence": 1
+    },
+    "OperatorSymbol": "-"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.DivideOperation",
+      "OperandCount": 2,
+      "Precedence": 2
+    },
+    "OperatorSymbol": "/"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.ProductOperation",
+      "OperandCount": 2,
+      "Precedence": 2
+    },
+    "OperatorSymbol": "*"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.UnaryOperations.ReciprocalOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "rec"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.UnaryOperations.SquareOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "squ"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.UnaryOperations.SquareRootOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "sqr"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.SinOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "sin"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.CosOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "cos"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.TanOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "tan"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.SecOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "sec"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.CosecOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "cosec"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.TrignometricOperations.CotOperation",
+      "OperandCount": 1,
+      "Precedence": 3
+    },
+    "OperatorSymbol": "cot"
+  }
+]

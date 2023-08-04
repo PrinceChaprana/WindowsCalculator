@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EvaluatorMethod" xml:space="preserve">
+    <value>Evaluate</value>
+  </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Type of Token is not defiend</value>
   </data>
   <data name="MoreOrLessOperands" xml:space="preserve">
     <value>Number of arguments are more or less than required</value>
+  </data>
+  <data name="NotDefinedValue" xml:space="preserve">
+    <value>The Value of the number is Not Defined</value>
   </data>
 </root>

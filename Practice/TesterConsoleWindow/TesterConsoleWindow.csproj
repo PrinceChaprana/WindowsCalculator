@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\operatorjson.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Assignment\CalculatorClassLibrary\CalculatorClassLibrary.csproj">

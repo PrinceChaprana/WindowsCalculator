@@ -2,7 +2,7 @@
 
 namespace CalculatorClassLibrary.ArthimaticOperation
 {
-    public class SubtractOperation : BinaryOperation
+    internal class SubtractOperation : BinaryOperation
     {
         protected override double EvaluateCore(double[] numbers)
         {

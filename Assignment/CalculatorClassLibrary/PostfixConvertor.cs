@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CalculatorClassLibrary
 {
-    public static class PostfixConvertor
+    internal static class PostfixConvertor
     {
-        public static int GetPrecedence(Token token)
+        internal static int GetPrecedence(Token token)
         {
             if(Evaluator.OperatorMap.Count == 0)
             {
@@ -19,23 +19,56 @@ namespace CalculatorClassLibrary
 
             return -1;
         }
-               
-        public static List<Token> Convertor(List<Token> infixExpression)
+
+        internal static List<Token> Convert(List<Token> infixExpression)
         {
             Stack<Token> operatorStack = new Stack<Token> ();
             List<Token> outputList = new List<Token> ();
 
-            foreach(var token in  infixExpression)
+            foreach (var token in infixExpression)
             {
+                switch (token.TokenType)
+                {
+                    case TokenTypeEnum.OPERAND:
+                        {
+                            outputList.Add(token);
+                            continue;
+                        }
+                    case TokenTypeEnum.OPENPARENTHESIS:
+                        {
+                            operatorStack.Push(token);
+                            continue;
+                        }
+                    case TokenTypeEnum.CLOSEDPARENTHESIS:
+                        {
+                            while (operatorStack.Count > 0
+                                && !(operatorStack.Peek().TokenType == TokenTypeEnum.OPENPARENTHESIS))
+                            {
+                                outputList.Add(operatorStack.Pop());
+                            }
+                            //delete extra (
+                            operatorStack.Pop();
+
+                            //check if the stack contains the Functions
+                            if (token.TokenType == TokenTypeEnum.FUNCTION)
+                                outputList.Add(operatorStack.Pop());
+                            continue;
+                        }
+                    default:
+                        {
+                            while (operatorStack.Count > 0
+                                && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek()))
+                            {
+                                outputList.Add(operatorStack.Pop());
+                            }
+                            operatorStack.Push(token);
+                            continue;
+                        }
+                }
+            }
+                /*
                 //if its a number
-                if (token.TokenType == TokenTypeEnum.OPERAND)
-                {
-                    outputList.Add (token);
-                }else if (token.TokenType == TokenTypeEnum.OPENPARENTHESIS)
-                {
-                    //if left parenthisis
-                    operatorStack.Push(token);
-                }else if (token.TokenType == TokenTypeEnum.CLOSEDPARENTHESIS)
+                else if (token.TokenType == TokenTypeEnum.CLOSEDPARENTHESIS)
                 {
                     while(operatorStack.Count > 0 
                         && !(operatorStack.Peek().TokenType == TokenTypeEnum.OPENPARENTHESIS))
@@ -65,7 +98,7 @@ namespace CalculatorClassLibrary
                     operatorStack.Push (token);
                 }
             }
-
+*/
             while(operatorStack.Count > 0)
             {
                 outputList.Add(operatorStack.Pop());

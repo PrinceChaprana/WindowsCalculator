@@ -1,45 +1,45 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.XPath;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CalculatorClassLibrary
 {
     public class Evaluator
     {
-        public static Dictionary<string, OperatorInfo> OperatorMap = new Dictionary<string, OperatorInfo>();
+        internal static Dictionary<string, OperatorInfo> OperatorMap = new Dictionary<string, OperatorInfo>();
+        
         public Evaluator()
         {
             InitilizeOpertorDictionary();
         }
 
-        public static void InitilizeOpertorDictionary()
+        internal static void InitilizeOpertorDictionary()
         {
-            OperatorInfo add = new OperatorInfo("CalculatorClassLibrary.SumOperation", 2, 1);
-            OperatorInfo subtract = new OperatorInfo("CalculatorClassLibrary.SubtractOperation", 2, 1);
-            OperatorInfo product = new OperatorInfo("CalculatorClassLibrary.ProductOperation", 2, 2);
-            OperatorInfo divide = new OperatorInfo("CalculatorClassLibrary.DivideOperation", 2, 2);
-            OperatorInfo tan = new OperatorInfo("CalculatorClassLibrary.DivideOperation", 1, 3);
-            OperatorInfo sin = new OperatorInfo("CalculatorClassLibrary.DivideOperation", 1, 3);
-            OperatorInfo cos = new OperatorInfo("CalculatorClassLibrary.DivideOperation", 1, 3);
+            string pathName = Path.Combine(Environment.CurrentDirectory, "Properties/OperatorJson.json");
 
-            OperatorMap.Add("+", add);
-            OperatorMap.Add("-", subtract);
-            OperatorMap.Add("*", product);
-            OperatorMap.Add("/", divide);
-            OperatorMap.Add("sin", sin);
-            OperatorMap.Add("tan", tan);
-            OperatorMap.Add("cos", cos);
+            var jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText(pathName));
+
+            foreach ( var opertorData in jsonData )
+            {
+                OperatorMap.Add(opertorData.OperatorSymbol, opertorData.OperatorInfo);
+            }
         }
 
         //convert to double after testing
-        public List<Token> Evaluate(string expression)
+        
+        public double Evaluate(string expression)
         {
             double result = 0;
             //Tokenize the string
             List<Token> tokenList = TokenizeString(expression);
-            List<Token> postfixTokenList = PostfixConvertor.Convertor(tokenList);
-            return postfixTokenList;
+            List<Token> postfixTokenList = PostfixConvertor.Convert(tokenList);
+            result = PostfixCalculator.Calculate(postfixTokenList);
+            return result;
         }
 
         private List<Token> TokenizeString(string expression)

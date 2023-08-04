@@ -35,7 +35,8 @@ namespace TesterConsoleWindow
         static int Main(string[] args)
         {
             Evaluator evaluator = new Evaluator();
-            List<string> result = evaluator.Evaluate("1");
+            double result = evaluator.Evaluate("6 / 2 - 4");
+            Console.WriteLine(result);
             Console.ReadLine();
             return 0;
         }
@@ -44,3 +45,4 @@ namespace TesterConsoleWindow
 
 //https://en.wikipedia.org/wiki/Order_of_operations
 //preceedence table https://pythongeeks.org/python-operator-precedence/
+// evaluate https://math.oxford.emory.edu/site/cs171/postfixExpressions/
