@@ -12,7 +12,8 @@ namespace TesterConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new Evaluator().Evaluate("rec ( 25 ) * 100"));
+            //Console.WriteLine(new Evaluator().Evaluate("10+(1)"));
+            Console.WriteLine(new Evaluator().Evaluate("sin(1-tan(45))"));
             //try catch operator
             Console.ReadLine();
         }

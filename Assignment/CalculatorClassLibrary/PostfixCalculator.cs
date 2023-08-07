@@ -2,36 +2,37 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace CalculatorClassLibrary
 {
     internal static class PostfixCalculator
     {
+
         internal static double Solve(double[] numbers,Token token)
         {
             //using extract the token value
             string operatorValue = token.Value;
             string className = Evaluator.OperatorMap[operatorValue].ClassName;
-
-            Type operatorType = Type.GetType(className);
-            object instance = Activator.CreateInstance(operatorType);
-
-            MethodInfo[] methodInfo = operatorType.GetMethods();
-            foreach(MethodInfo methods in methodInfo)
+            if(Evaluator.MethodInfoMap.ContainsKey(operatorValue))
             {
-                object result = null;
-                if(methods.Name == Resources.EvaluatorMethod)
+                Type operatorType = Type.GetType(className);
+                MethodInfo[] methodInfo = operatorType.GetMethods();
+                foreach (MethodInfo methods in methodInfo)
                 {
-                    object[] parameter = new object[] { numbers };
-                    result = methods.Invoke(instance, parameter);
-                    double answer = 0;
-                    if (double.TryParse(result.ToString(), out answer))
+                    object result = null;
+                    if (methods.Name == Resources.EvaluatorMethod)
                     {
-                        return answer;
+                        object[] parameter = new object[] { numbers };
+                        result = methods.Invoke(Evaluator.MethodInfoMap[operatorValue], parameter);
+                        double answer = 0;
+                        if (double.TryParse(result.ToString(), out answer))
+                        {
+                            return answer;
+                        }
                     }
                 }
             }
+
             //object result = null;
             //throw the exception
             
@@ -46,6 +47,7 @@ namespace CalculatorClassLibrary
 
             foreach (Token token in postfixExpression)
             {
+                Console.ReadLine();
                 switch (token.TokenType)
                 {
                     case TokenTypeEnum.OPERATOR:
@@ -55,7 +57,10 @@ namespace CalculatorClassLibrary
 
                             for(int index = numberOfOperenad - 1;index >= 0; index--)
                             {
-                                numbers[index] = stack.Pop();
+                                if(stack.Count == 0 && token.Value == "-")
+                                    numbers[index] = 0;
+                                if(stack.Count!=0)
+                                    numbers[index] = stack.Pop();
                             }
                             stack.Push(Solve(numbers, token));
 
@@ -74,7 +79,8 @@ namespace CalculatorClassLibrary
                             stack.Push(double.Parse(token.Value));
                             continue;
                         }
-                }                
+                }
+                Console.ReadLine();
             }
             return stack.Peek();
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CalculatorClassLibrary.UnaryOperations
+﻿namespace CalculatorClassLibrary.UnaryOperations
 {
     internal class ReciprocalOperation : UnaryOperation
     {

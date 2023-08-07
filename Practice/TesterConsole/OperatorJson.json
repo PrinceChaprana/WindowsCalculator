@@ -1,0 +1,26 @@
+[
+  {
+    "operatorInfo": {
+      "ClassName": "AddOperation",
+      "OperandCount": 2,
+      "Precedence": 1
+    },
+    "OperatorSymbol": "+"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "AddOperation",
+      "OperandCount": 2,
+      "Precedence": 1
+    },
+    "OperatorSymbol": "-"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "AddOperation",
+      "OperandCount": 2,
+      "Precedence": 1
+    },
+    "OperatorSymbol": "/"
+  }
+]

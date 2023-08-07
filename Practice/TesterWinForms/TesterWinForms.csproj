@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29322100-1E53-4A32-80F3-3382C67698AC}</ProjectGuid>
+    <ProjectGuid>{73B09620-E5AB-44D2-B1E1-0B063E956BE4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CalculatorApplication</RootNamespace>
-    <AssemblyName>CalculatorApplication</AssemblyName>
+    <RootNamespace>TesterWinForms</RootNamespace>
+    <AssemblyName>TesterWinForms</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\CalculatorClassLibrary\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,19 +59,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -84,33 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\th.jfif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\th.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\OIP.jfif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\backspace-computer-icons-png-favpng-07FqYXWmDnmWzDyi0RAvpT5hC.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\R.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\OIP-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\backspace-computer-icons-png-favpng-07FqYXWmDnmWzDyi0RAvpT5hC-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CalculatorClassLibrary\CalculatorClassLibrary.csproj">
-      <Project>{64aef550-2ed3-449d-9f1e-d1906099850d}</Project>
-      <Name>CalculatorClassLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

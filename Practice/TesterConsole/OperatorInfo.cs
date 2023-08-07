@@ -1,4 +1,6 @@
-﻿namespace CalculatorClassLibrary
+﻿using System;
+
+namespace CalculatorClassLibrary
 {
     public class OperatorInfo
     {
