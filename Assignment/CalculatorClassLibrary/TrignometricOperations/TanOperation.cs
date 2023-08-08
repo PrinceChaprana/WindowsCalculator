@@ -11,6 +11,7 @@ namespace CalculatorClassLibrary.TrignometricOperations
     {
         protected override double EvaluateAnswer(double radian)
         {
+            //radian = Math.Round(radian, 3);
             return Math.Tan(radian);
         }
     }

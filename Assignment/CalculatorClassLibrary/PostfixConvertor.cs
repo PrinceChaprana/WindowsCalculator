@@ -1,26 +1,30 @@
-﻿using System;
+﻿using CalculatorClassLibrary.Properties;
+using System;
 using System.Collections.Generic;
 
 namespace CalculatorClassLibrary
 {
-    internal static class PostfixConvertor
+    internal class PostfixConvertor
     {
-        internal static int GetPrecedence(Token token)
+        internal int GetPrecedence(Token token)
         {
-            if(Evaluator.OperatorMap.Count == 0)
-            {
-                Evaluator.InitilizeOpertorDictionary();
-            }
-
             if (Evaluator.OperatorMap.ContainsKey(token.Value))
             {
-                return Evaluator.OperatorMap[token.Value].Precedence;
+                int precedence = Evaluator.OperatorMap[token.Value].Precedence;
+                if(precedence == 1 && token.TokenType == TokenTypeEnum.UNARYOPERATOR)
+                {
+                    return 3;
+                }
+                else
+                {
+                    return precedence;
+                }
             }
 
             return -1;
         }
 
-        internal static List<Token> Convert(List<Token> infixExpression)
+        internal List<Token> Convert(List<Token> infixExpression)
         {
             Stack<Token> operatorStack = new Stack<Token> ();
             List<Token> outputList = new List<Token> ();
@@ -47,15 +51,26 @@ namespace CalculatorClassLibrary
                                 outputList.Add(operatorStack.Pop());
                             }
                             //delete extra (
-                            operatorStack.Pop();
+                            if(operatorStack.Count > 0 &&  operatorStack.Peek().TokenType == TokenTypeEnum.OPENPARENTHESIS)
+                                operatorStack.Pop();
+                            else
+                            {
+                                throw new ArgumentException(Resources.InvalidExpression);
+                            }
 
                             //check if the stack contains the Functions
-                            if (token.TokenType == TokenTypeEnum.FUNCTION)
-                                outputList.Add(operatorStack.Pop());
+                            //if (token.TokenType == TokenTypeEnum.FUNCTION)
+                            //    outputList.Add(operatorStack.Pop());
                             continue;
                         }
                     default:
                         {
+                            // -- 10 = 10
+                            if(token.TokenType == TokenTypeEnum.UNARYOPERATOR ) 
+                            {
+                                operatorStack.Push(token);
+                                continue;
+                            }
                             while (operatorStack.Count > 0
                                 && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek()))
                             {

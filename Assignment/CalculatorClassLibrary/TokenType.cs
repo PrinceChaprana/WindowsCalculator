@@ -3,12 +3,9 @@
     public enum TokenTypeEnum
     {
         OPERAND,
-        OPERATOR,
-        TRIGNOMETRIC,
+        BINARYOPERATOR,     
+        UNARYOPERATOR,
         OPENPARENTHESIS,
         CLOSEDPARENTHESIS,
-        EXPONENTIAL,
-        INVALID,
-        FUNCTION
     }
 }

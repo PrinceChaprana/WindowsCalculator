@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClassNotFound" xml:space="preserve">
+    <value>Class Name is Invalid or Wrong</value>
+  </data>
   <data name="EvaluatorMethod" xml:space="preserve">
     <value>Evaluate</value>
+  </data>
+  <data name="InvalidExpression" xml:space="preserve">
+    <value>the expression is not correct</value>
+  </data>
+  <data name="InvalidNumber" xml:space="preserve">
+    <value>the number is invalid or not correct</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Type of Token is not defiend</value>

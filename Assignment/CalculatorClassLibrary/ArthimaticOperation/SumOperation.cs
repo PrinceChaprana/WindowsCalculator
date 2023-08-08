@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CalculatorClassLibrary.ArthimaticOperation
+namespace CalculatorClassLibrary.ArthimaticOperations
 {
     internal class SumOperation : BinaryOperation
     {

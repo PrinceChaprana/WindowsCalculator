@@ -1,7 +1,7 @@
 [
   {
     "operatorInfo": {
-      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.SumOperation",
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.SumOperation",
       "OperandCount": 2,
       "Precedence": 1
     },
@@ -9,7 +9,7 @@
   },
   {
     "operatorInfo": {
-      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.SubtractOperation",
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.SubtractOperation",
       "OperandCount": 2,
       "Precedence": 1
     },
@@ -17,7 +17,7 @@
   },
   {
     "operatorInfo": {
-      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.DivideOperation",
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.DivideOperation",
       "OperandCount": 2,
       "Precedence": 2
     },
@@ -25,7 +25,7 @@
   },
   {
     "operatorInfo": {
-      "ClassName": "CalculatorClassLibrary.ArthimaticOperation.ProductOperation",
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.ProductOperation",
       "OperandCount": 2,
       "Precedence": 2
     },

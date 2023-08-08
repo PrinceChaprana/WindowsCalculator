@@ -71,6 +71,24 @@ namespace CalculatorApplication.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expression.
+        /// </summary>
+        internal static string Expression {
+            get {
+                return ResourceManager.GetString("Expression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        internal static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap OIP_removebg_preview {
@@ -87,6 +105,15 @@ namespace CalculatorApplication.Properties {
             get {
                 object obj = ResourceManager.GetObject("R", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        internal static string Result {
+            get {
+                return ResourceManager.GetString("Result", resourceCulture);
             }
         }
         

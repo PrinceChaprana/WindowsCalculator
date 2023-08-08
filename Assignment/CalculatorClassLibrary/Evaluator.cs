@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CalculatorClassLibrary.Properties;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,28 +9,28 @@ namespace CalculatorClassLibrary
 {
     public class Evaluator
     {
+        PostfixCalculator postfixCalculator;
+        PostfixConvertor postfixConvertor;
+        List<OperatorData> _jsonData;
         internal static Dictionary<string, OperatorInfo> OperatorMap = new Dictionary<string, OperatorInfo>();
-        internal static Dictionary<string, object> MethodInfoMap = new Dictionary<string, object>();
         public Evaluator()
         {
-            InitilizeOpertorDictionary();
+            if(OperatorMap.Count <= 0)
+            {
+                InitilizeOpertorDictionary();
+            }
+            postfixCalculator = new PostfixCalculator();
+            postfixConvertor = new PostfixConvertor();
         }
 
-        internal static void InitilizeOpertorDictionary()
+        internal void InitilizeOpertorDictionary()
         {
-            string pathName = Path.Combine(Environment.CurrentDirectory, "Properties/OperatorJson.json");
+            _jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText("Properties/OperatorJson.json"));
 
-            var jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText(pathName));
-
-            foreach ( var opertorData in jsonData )
+            foreach ( var jsonOperatorData in _jsonData )
             {
-                OperatorMap.Add(opertorData.OperatorSymbol, opertorData.OperatorInfo);
-                string className = opertorData.OperatorInfo.ClassName;
-
-                Type operatorType = Type.GetType(className);
-                object instance = Activator.CreateInstance(operatorType);
-                //instance is more heavy then gettype method
-                MethodInfoMap.Add(opertorData.OperatorSymbol, instance);
+                OperatorData operatorData = new OperatorData(jsonOperatorData.OperatorSymbol, jsonOperatorData.OperatorInfo);
+                OperatorMap.Add(operatorData.OperatorSymbol,operatorData.OperatorInfo);                
             }
         }
 
@@ -40,30 +41,61 @@ namespace CalculatorClassLibrary
             double result = 0;
             //Tokenize the string
             List<Token> tokenList = TokenizeString(expression);
-            List<Token> postfixTokenList = PostfixConvertor.Convert(tokenList);
-            result = PostfixCalculator.Calculate(postfixTokenList);
+            List<Token> postfixTokenList = postfixConvertor.Convert(tokenList);
+            result = postfixCalculator.Calculate(postfixTokenList);
             return result;
+        }
+
+        public void RegisterCustomOperation(string Symbol,string className,int precedence,int operandCount)
+        {
+            OperatorInfo operatorInfo = new OperatorInfo(className, precedence, operandCount);
+            OperatorData operatorData = new OperatorData(Symbol, operatorInfo);
+
+            //var _jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText("Properties/OperatorJson.json"));
+            
+            _jsonData.Add(operatorData);
+
+            string jsonString = JsonConvert.SerializeObject(_jsonData);
+            File.WriteAllText("Properties/OperatorJson.json", jsonString);
+            OperatorMap.Add(Symbol, operatorInfo);
+
         }
 
         private List<Token> TokenizeString(string expression)
         {
-            //tokenize the string based of spaces it had
-            //sin(30) + 40 returns sin(30), +, 40
             List<String> splittedString = SpacedExpression(expression);
-            //need to make this list<string> to list<token> with all the properties of the tokens
             List<Token> tokens = new List<Token>();
 
-            foreach (string substring in splittedString)
+            for(int index = 0; index < splittedString.Count; index++)
             {
                 Token token;
-
-                if (substring[0] >= '0' && substring[0] <= '9')
+                string substring = splittedString[index];
+                if ((substring[0] >= '0' && substring[0] <= '9') || substring[0] == '.')
                 {
+                    if (substring.Contains('.'))
+                    {
+                        //what about 1.2.3
+                        if (substring.LastIndexOf(".") != substring.IndexOf(".")){
+                            throw new ArgumentException(Resources.InvalidNumber);
+                        }
+
+                        int dotIndex = substring.IndexOf('.');
+                        string zeroNumber = "0";
+                        // .1
+                        if (dotIndex == 0)
+                        {
+                            substring = zeroNumber + substring;
+                        }else if(dotIndex == substring.Count() - 1)
+                        {
+                            // 1.
+                            substring = substring + zeroNumber;
+                        }
+                    }
                     token = new Token(substring, TokenTypeEnum.OPERAND);
                 }
                 else if (substring[0] >= 'a' && substring[0] <= 'z')
                 {
-                    token = new Token(substring, TokenTypeEnum.FUNCTION);
+                    token = new Token(substring, TokenTypeEnum.UNARYOPERATOR);
                 }
                 else if (substring.Contains('('))
                 {
@@ -75,10 +107,17 @@ namespace CalculatorClassLibrary
                 }
                 else
                 {
-                    token = new Token(substring,TokenTypeEnum.OPERATOR);
+                    //if the string is + and - and either is empty or there is no operand before
+                    if (substring == "-" && (tokens.Count == 0 || tokens.Last().TokenType != TokenTypeEnum.OPERAND))
+                    {
+                        token = new Token(substring, TokenTypeEnum.UNARYOPERATOR);
+                    }
+                    else
+                        token = new Token(substring, TokenTypeEnum.BINARYOPERATOR);
                 }
                 tokens.Add(token);
             }
+
             return tokens;
         }
 
@@ -86,30 +125,39 @@ namespace CalculatorClassLibrary
         {
             List<string> result = new List<string>();
 
-            int prev = 0;
+            int previousIndex = 0;
             for (int index = 0; index < expression.Length; index++)
             {
-                char current = expression[index];
-                if (current == '(' || current == ')' || current == ' ' 
-                    || current == '+' || current == '-'
-                    || current == '*' || current == '/')
+                char currentCharacter = expression[index];
+                if (currentCharacter == '(' || currentCharacter == ')' || currentCharacter == ' ' 
+                    || currentCharacter == '+' || currentCharacter == '-'
+                    || currentCharacter == '*' || currentCharacter == '/')
                 {
-                    result.Add(expression.Substring(prev , index - prev));
-                    result.Add(current.ToString());
-                    prev = index + 1;
+                    string token = expression.Substring(previousIndex, index - previousIndex);
+                    //what if its tan32                    
+                    result.Add(token);
+                    result.Add(currentCharacter.ToString());
+                    previousIndex = index + 1;
                 }
             }
-            if (prev != expression.Length)
-                result.Add(expression.Substring(prev));
+            if (previousIndex != expression.Length)
+                result.Add(expression.Substring(previousIndex));
             List<string> result2 = new List<string>();
             foreach(string s in result)
             {
-                if(s.Length != 0)
+                if(s.Length != 0 && !s.Contains(' '))
                 {
                     result2.Add(s);
                 }
             }
             return result2;
+        }
+
+        private bool IsNumber(char character)
+        {
+            if ((character >= '0' && character <= '9') || character == '.')
+                return true;
+            return false;
         }
     }
 }

@@ -61,11 +61,38 @@ namespace CalculatorClassLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Class Name is Invalid or Wrong.
+        /// </summary>
+        internal static string ClassNotFound {
+            get {
+                return ResourceManager.GetString("ClassNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Evaluate.
         /// </summary>
         internal static string EvaluatorMethod {
             get {
                 return ResourceManager.GetString("EvaluatorMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the expression is not correct.
+        /// </summary>
+        internal static string InvalidExpression {
+            get {
+                return ResourceManager.GetString("InvalidExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the number is invalid or not correct.
+        /// </summary>
+        internal static string InvalidNumber {
+            get {
+                return ResourceManager.GetString("InvalidNumber", resourceCulture);
             }
         }
         
