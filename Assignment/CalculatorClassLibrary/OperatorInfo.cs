@@ -1,15 +1,15 @@
 ﻿using CalculatorClassLibrary.Properties;
 using System;
+using System.Reflection;
 
 namespace CalculatorClassLibrary
 {
     public class OperatorInfo
     {
-        public string ClassName {get; set;}
-        public int OperandCount{get; set;}
-        public int Precedence {get; set;}
-
-        internal Type OperatorType {get; set;}
+        internal string ClassName {get; set;}
+        internal int OperandCount{get; set;}
+        internal int Precedence {get; set;}
+        internal MethodInfo EvaluateMethodInfo {get; set;}
         internal object OperatorInstance {get; set;}
 
         public OperatorInfo(string className, int operandCount, int precedence)
@@ -19,15 +19,16 @@ namespace CalculatorClassLibrary
             this.Precedence = precedence;
             CreateInstance();
         }
+
         void CreateInstance()
-        {
-            
-            OperatorType = Type.GetType(ClassName);
+        {            
+            Type OperatorType = Type.GetType(ClassName);
             if(OperatorType == null)
             {
                 throw new ArgumentException(Resources.ClassNotFound);
             }
-            OperatorInstance = Activator.CreateInstance(OperatorType);
+            this.OperatorInstance = Activator.CreateInstance(OperatorType);
+            EvaluateMethodInfo = OperatorType.GetMethod(Resources.EvaluatorMethod);
         }
     }
 }

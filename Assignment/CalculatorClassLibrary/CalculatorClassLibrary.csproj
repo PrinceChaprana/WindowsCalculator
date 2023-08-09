@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StringTokenizer.cs" />
     <Compile Include="TrignometricOperations\CosecOperation.cs" />
     <Compile Include="TrignometricOperations\CosOperation.cs" />
     <Compile Include="TrignometricOperations\CotOperation.cs" />

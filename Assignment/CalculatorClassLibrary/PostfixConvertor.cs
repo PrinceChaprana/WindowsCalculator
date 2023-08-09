@@ -8,19 +8,11 @@ namespace CalculatorClassLibrary
     {
         internal int GetPrecedence(Token token)
         {
-            if (Evaluator.OperatorMap.ContainsKey(token.Value))
+            foreach(var item in Evaluator.OperatorList)
             {
-                int precedence = Evaluator.OperatorMap[token.Value].Precedence;
-                if(precedence == 1 && token.TokenType == TokenTypeEnum.UNARYOPERATOR)
-                {
-                    return 3;
-                }
-                else
-                {
-                    return precedence;
-                }
+                if (item.OperatorSymbol.Equals(token.Value))
+                    return item.OperatorInfo.Precedence;
             }
-
             return -1;
         }
 
@@ -81,39 +73,7 @@ namespace CalculatorClassLibrary
                         }
                 }
             }
-                /*
-                //if its a number
-                else if (token.TokenType == TokenTypeEnum.CLOSEDPARENTHESIS)
-                {
-                    while(operatorStack.Count > 0 
-                        && !(operatorStack.Peek().TokenType == TokenTypeEnum.OPENPARENTHESIS))
-                    {
-                        outputList.Add(operatorStack.Pop());
-                    }
-                    //delete extra (
-                    operatorStack.Pop();
-                    //check for function to return the call like trignometric
-                    try
-                    {
-                        if (token.TokenType == TokenTypeEnum.FUNCTION)
-                            outputList.Add(operatorStack.Pop());
-                    }catch(ArgumentException e)
-                    {
-                        //Unhandled Exception
-                        Console.WriteLine(e);
-                    }
-                }
-                else
-                {
-                    while(operatorStack.Count > 0 
-                        && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek()))
-                    {
-                        outputList.Add(operatorStack.Pop());
-                    }
-                    operatorStack.Push (token);
-                }
-            }
-*/
+
             while(operatorStack.Count > 0)
             {
                 outputList.Add(operatorStack.Pop());
