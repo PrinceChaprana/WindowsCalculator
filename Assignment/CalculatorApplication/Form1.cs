@@ -3,19 +3,34 @@ using CalculatorClassLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace CalculatorApplication
 {
     public partial class MainFrame : Form
     {
+        public Stack<Control> panelStack = new Stack<Control>();
+        int _minWindowWidth = 420;
+        //default the window has space for the labels each of 40 unit height
+        int _minWindowHeight = 160;
+        int _minButtonSize = 40;
+
+
+        //for spaceing between components
+        int _offset = 12;
+        //the gap between the table layout component
+        int _gapOffset = 6;
+        int _totalColumn = 3;
+        int _minNumbersButtonRows = 3;
+        int _numbersRows = 4;
+
+        //rows for different 
+        int operatorRows;
+
         public MainFrame()
         {
             //InitializeComponent();
@@ -24,41 +39,23 @@ namespace CalculatorApplication
 
         private void InitilizeUI()
         {
-            string pathName = Path.Combine(Environment.CurrentDirectory, "Properties/OperatorJson.json");
+            string pathName = "Properties/OperatorJson.json";
+            var jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText(pathName));            
 
-            var jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText(pathName));
+            
 
-            //Main form decleration
+            //offset for showing last
+            //_minWindowHeight += 50;
+            
 
-            //nav bar panel
+            //NavBar Panel
             Panel navPanel = new Panel();
             navPanel.Dock = DockStyle.Top;
             navPanel.Height = 40;
             navPanel.BackColor = Color.Red;
+            panelStack.Push(navPanel);
 
-            TableLayoutPanel numberTableLayout = new TableLayoutPanel();
-            numberTableLayout.Dock = DockStyle.Top;
-            numberTableLayout.RowCount = 4;
-            numberTableLayout.ColumnCount = 3;
-            numberTableLayout.Size = new Size(379, 531);
-
-            AddOperandButtons(numberTableLayout);
-
-
-            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-            tableLayoutPanel.Dock = DockStyle.Top;
-            List<OperatorData> _jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText("Properties/OperatorJson.json"));
-
-            tableLayoutPanel.RowCount = (_jsonData.Count()/3) + 1;
-            tableLayoutPanel.ColumnCount = 3;
-            tableLayoutPanel.Size = new Size(379, 260);
-
-            AddOperatorButtons(_jsonData,tableLayoutPanel);
-            //expression Panel for showing expression
-            
-
-            Controls.Add(numberTableLayout);
-            Controls.Add(tableLayoutPanel);
+            //Output TextBox Panel
             for (int count = 1; count <= 3; count++)
             {
                 switch (count)
@@ -74,28 +71,67 @@ namespace CalculatorApplication
                         continue;
                 }
             }
-            Controls.Add(navPanel);
-            
 
+            //Draw the Operators from the Json Library
+            TableLayoutPanel operatorTableLayout = new TableLayoutPanel();
+            operatorTableLayout.Dock = DockStyle.Top;
+            operatorTableLayout.RowCount = operatorRows;
+            operatorTableLayout.ColumnCount = _totalColumn;
+            operatorTableLayout.Size = new Size(_minWindowWidth, spaceforOperator );
+            AddOperatorButtons(jsonData, operatorTableLayout);
+            panelStack.Push(operatorTableLayout);
+
+            //Draw Number Operands
+            TableLayoutPanel numberTableLayout = new TableLayoutPanel();
+            numberTableLayout.Dock = DockStyle.Top;
+            numberTableLayout.RowCount = operatorRows;
+            numberTableLayout.ColumnCount = _totalColumn;
+            numberTableLayout.Size = new Size(_minWindowWidth, _spaceForNumbers);
+            AddOperandButtons(numberTableLayout);
+            panelStack.Push(numberTableLayout);
+
+            _minWindowHeight += numberTableLayout.Height;
+
+            //calculate the dimension of the windows
+            //total height required for showing operators
+            int operatorCount = jsonData.Count;
+            operatorRows = operatorCount / _totalColumn + 1;
+            int spaceforOperator = operatorRows * (_minButtonSize + operatorTableLayout.Padding.Top + operatorTableLayout.Margin.Top);
+            _minWindowHeight += spaceforOperator;
+
+            //total height required for showing the numbers            
+            int _spaceForNumbers = _numbersRows * (_minButtonSize + numberTableLayout.Padding.Top + numberTableLayout.Margin.Top);
+            _minWindowHeight += _spaceForNumbers;
+
+            //setting MainWindow 
+            this.Width = _minWindowWidth;
+            this.Height = _minWindowHeight;
+
+            //Draw all the panels
+            DrawPanel();
+           
         }
 
-        private void AddOperandButtons(TableLayoutPanel numberTableLayout)
+        private void DrawPanel()
         {
-            int count = 10;
-            for(int i = 0; i < 4; i++)
+            while(panelStack.Count > 0)
             {
-                for(int j = 0; j < 3; j++)
+                Controls.Add(panelStack.Pop());
+            }
+        }
+
+        private void AddOperandButtons(TableLayoutPanel layout)
+        {
+            int number = 1;
+            for (int row = 0; row < _numbersRows; row++)
+            {
+                for (int column = 0; column < _totalColumn; column++)
                 {
-                    Button button = new Button();
-                    if (count == 10)
-                        button.Text = 0.ToString();
-                    else
-                    {
-                        button.Text = count.ToString();
-                    }
-                    button.Size = new Size(80, 80);
-                    numberTableLayout.Controls.Add(button,j,i);
-                    count--;
+                    Button b = new Button();
+                    b.Size = new Size((_minWindowWidth / _totalColumn) - _offset, _minButtonSize);
+                    b.Text = (number % 11).ToString();
+                    layout.Controls.Add(b, column, row);
+                    number++;
                 }
             }
         }
@@ -103,20 +139,17 @@ namespace CalculatorApplication
         private void AddOperatorButtons(List<OperatorData> operatorData,TableLayoutPanel layout)
         {
             int count = operatorData.Count() - 1;
-            for(int j = 0; j < layout.RowCount; j++) { 
-                for(int i=0;i<layout.ColumnCount;i++) 
+            for(int row=0; row < operatorRows; row++)
+            {
+                for(int column=0; column < _totalColumn; column++)
                 {
-                    Button btn = new Button();
-                    if (count < 0) break;
-                    btn.Text = operatorData[count--].OperatorSymbol;
-                    btn.Dock = DockStyle.Fill;
-                    btn.Size = new Size(80, 60);
-
-                    layout.Controls.Add(btn, j, i);
+                    if (count < 0) return;
+                    Button b = new Button();
+                    b.Size = new Size((_minWindowWidth / _totalColumn) - _offset ,_minButtonSize);
+                    b.Text = operatorData[count--].OperatorSymbol;
+                    layout.Controls.Add(b,column,row);
                 }
             }
-
-            
         }
 
         private void CreateTextBox(string v)
@@ -134,7 +167,7 @@ namespace CalculatorApplication
             expressionTextBox.TextAlign = HorizontalAlignment.Right;
             expressionTextBox.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             expressionPanel.Controls.Add(expressionTextBox);
-            Controls.Add(expressionPanel);
+            panelStack.Push(expressionPanel);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -158,6 +191,11 @@ namespace CalculatorApplication
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

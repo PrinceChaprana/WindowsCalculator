@@ -37,9 +37,9 @@ namespace CalculatorClassLibrary
             return result;
         }
 
-        public void RegisterCustomOperation(string Symbol, string className, int precedence, int operandCount)
+        public void RegisterCustomOperation(string Symbol, string className, int precedence, int operandCount,bool isLeftAssociative)
         {
-            OperatorInfo operatorInfo = new OperatorInfo(className, precedence, operandCount);
+            OperatorInfo operatorInfo = new OperatorInfo(className, precedence, operandCount,isLeftAssociative);
             OperatorData operatorData = new OperatorData(Symbol, operatorInfo);
 
             //var _OperatorList = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText("Properties/OperatorJson.json"));

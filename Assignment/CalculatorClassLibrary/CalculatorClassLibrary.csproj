@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArthimaticOperation\DivideOperation.cs" />
+    <Compile Include="ArthimaticOperation\PowerOperation.cs" />
     <Compile Include="ArthimaticOperation\ProductOperation.cs" />
     <Compile Include="ArthimaticOperation\SubtractOperation.cs" />
     <Compile Include="ArthimaticOperation\SumOperation.cs" />

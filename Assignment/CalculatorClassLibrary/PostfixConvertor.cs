@@ -15,6 +15,15 @@ namespace CalculatorClassLibrary
             }
             return -1;
         }
+        internal bool IsLeftAssocativity(Token token)
+        {
+            foreach (var item in Evaluator.OperatorList)
+            {
+                if (item.OperatorSymbol.Equals(token.Value))
+                    return item.OperatorInfo.IsLeftAssociative;
+            }
+            return true;
+        }
 
         internal List<Token> Convert(List<Token> infixExpression)
         {
@@ -64,7 +73,8 @@ namespace CalculatorClassLibrary
                                 continue;
                             }
                             while (operatorStack.Count > 0
-                                && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek()))
+                                && GetPrecedence(token) <= GetPrecedence(operatorStack.Peek())
+                                && IsLeftAssocativity(token))
                             {
                                 outputList.Add(operatorStack.Pop());
                             }

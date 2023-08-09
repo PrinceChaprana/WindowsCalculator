@@ -3,7 +3,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.ArthimaticOperations.SumOperation",
       "OperandCount": 2,
-      "Precedence": 1
+      "Precedence": 1,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "+"
   },
@@ -11,7 +12,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.ArthimaticOperations.SubtractOperation",
       "OperandCount": 2,
-      "Precedence": 1
+      "Precedence": 1,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "-"
   },
@@ -19,7 +21,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.ArthimaticOperations.DivideOperation",
       "OperandCount": 2,
-      "Precedence": 2
+      "Precedence": 2,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "/"
   },
@@ -27,7 +30,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.ArthimaticOperations.ProductOperation",
       "OperandCount": 2,
-      "Precedence": 2
+      "Precedence": 2,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "*"
   },
@@ -35,7 +39,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.UnaryOperations.ReciprocalOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "rec"
   },
@@ -43,7 +48,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.UnaryOperations.SquareOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "squ"
   },
@@ -51,7 +57,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.UnaryOperations.SquareRootOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "sqr"
   },
@@ -59,7 +66,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.SinOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "sin"
   },
@@ -67,7 +75,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.CosOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "cos"
   },
@@ -75,7 +84,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.TanOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "tan"
   },
@@ -83,7 +93,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.SecOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "sec"
   },
@@ -91,7 +102,8 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.CosecOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "cosec"
   },
@@ -99,8 +111,18 @@
     "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.TrignometricOperations.CotOperation",
       "OperandCount": 1,
-      "Precedence": 3
+      "Precedence": 3,
+      "IsLeftAssociative": true
     },
     "OperatorSymbol": "cot"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.PowerOperation",
+      "OperandCount": 2,
+      "Precedence": 3,
+      "IsLeftAssociative": false
+    },
+    "OperatorSymbol": "^"
   }
 ]

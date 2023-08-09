@@ -9,14 +9,16 @@ namespace CalculatorClassLibrary
         internal string ClassName {get; set;}
         internal int OperandCount{get; set;}
         internal int Precedence {get; set;}
+        internal bool IsLeftAssociative { get; set;}
         internal MethodInfo EvaluateMethodInfo {get; set;}
         internal object OperatorInstance {get; set;}
 
-        public OperatorInfo(string className, int operandCount, int precedence)
+        public OperatorInfo(string className, int operandCount, int precedence, bool isLeftAssociative)
         {
             this.ClassName = className;
             this.OperandCount = operandCount;
             this.Precedence = precedence;
+            this.IsLeftAssociative = isLeftAssociative;
             CreateInstance();
         }
 
