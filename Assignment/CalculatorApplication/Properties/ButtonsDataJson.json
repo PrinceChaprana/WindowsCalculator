@@ -1,0 +1,290 @@
+[
+  {
+    "OpeartorSymbol": "sin",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "sin",
+      "Row": 1,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "cos",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "cos",
+      "Row": 1,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "tan",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "tan",
+      "Row": 1,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "log",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "log",
+      "Row": 1,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "cosec",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "cosec",
+      "Row": 2,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "sec",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "sec",
+      "Row": 2,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "cot",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "cot",
+      "Row": 2,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "e",
+    "ButtonType": "FUNCTION",
+    "ButtonInfo": {
+      "Name": "e",
+      "Row": 2,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "Custom",
+    "ButtonType": "OPERATION",
+    "ButtonInfo": {
+      "Name": "custom",
+      "Row": 3,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "CE",
+    "ButtonType": "OPERATION",
+    "ButtonInfo": {
+      "Name": "CE",
+      "Row": 3,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "c",
+    "ButtonType": "OPERATION",
+    "ButtonInfo": {
+      "Name": "C",
+      "Row": 3,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "del",
+    "ButtonType": "OPERATION",
+    "ButtonInfo": {
+      "Name": "Del",
+      "Row": 3,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "%",
+    "ButtonType": "OPERATION",
+    "ButtonInfo": {
+      "Name": "%",
+      "Row": 4,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "(",
+    "ButtonType": "OPENPARENTHASIS",
+    "ButtonInfo": {
+      "Name": "(",
+      "Row": 4,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": ")",
+    "ButtonType": "CLOSEDPARENTHASIS",
+    "ButtonInfo": {
+      "Name": ")",
+      "Row": 4,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "/",
+    "ButtonType": "OPERATOR",
+    "ButtonInfo": {
+      "Name": "/",
+      "Row": 4,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "1",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "1",
+      "Row": 5,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "2",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "2",
+      "Row": 5,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "3",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "3",
+      "Row": 5,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "*",
+    "ButtonType": "OPERATOR",
+    "ButtonInfo": {
+      "Name": "X",
+      "Row": 5,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "4",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "4",
+      "Row": 6,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "5",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "5",
+      "Row": 6,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "6",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "6",
+      "Row": 6,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "-",
+    "ButtonType": "OPERATOR",
+    "ButtonInfo": {
+      "Name": "-",
+      "Row": 6,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "7",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "7",
+      "Row": 7,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": "8",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "8",
+      "Row": 7,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "9",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "9",
+      "Row": 7,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "+",
+    "ButtonType": "OPERATOR",
+    "ButtonInfo": {
+      "Name": "+",
+      "Row": 7,
+      "Column": 4
+    }
+  },
+  {
+    "OpeartorSymbol": "0",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "0",
+      "Row": 8,
+      "Column": 2
+    }
+  },
+  {
+    "OpeartorSymbol": "-",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": "+/-",
+      "Row": 8,
+      "Column": 1
+    }
+  },
+  {
+    "OpeartorSymbol": ".",
+    "ButtonType": "OPERAND",
+    "ButtonInfo": {
+      "Name": ".",
+      "Row": 8,
+      "Column": 3
+    }
+  },
+  {
+    "OpeartorSymbol": "=",
+    "ButtonType": "EQUAL",
+    "ButtonInfo": {
+      "Name": "=",
+      "Row": 8,
+      "Column": 4
+    }
+  }
+]

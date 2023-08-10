@@ -1,4 +1,6 @@
-﻿namespace CalculatorApplication
+﻿using System;
+
+namespace CalculatorApplication
 {
     partial class MainFrame
     {
@@ -26,6 +28,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
+        /*
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
@@ -622,6 +626,8 @@
             this.ResumeLayout(false);
 
         }
+              
+        */
 
         #endregion
 
@@ -669,6 +675,15 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.Button button39;
     }
 }
 

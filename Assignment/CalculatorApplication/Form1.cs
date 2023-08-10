@@ -7,197 +7,253 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace CalculatorApplication
 {
     public partial class MainFrame : Form
     {
         public Stack<Control> panelStack = new Stack<Control>();
-        int _minWindowWidth = 420;
-        //default the window has space for the labels each of 40 unit height
-        int _minWindowHeight = 160;
-        int _minButtonSize = 40;
-
-
         //for spaceing between components
-        int _offset = 12;
         //the gap between the table layout component
-        int _gapOffset = 6;
-        int _totalColumn = 3;
-        int _minNumbersButtonRows = 3;
-        int _numbersRows = 4;
+        int _totalColumn = 4;
 
-        //rows for different 
-        int operatorRows;
+        private string Expression;
+        private string InputString = "";
+        private string ResultString = "";
+
+        List<ButtonData> buttons;
+        Evaluator evaluator;
+        ButtonTypeEnum _lastPressedButton = ButtonTypeEnum.OPERATION;
+
+        int _parenthesisCount = 0;
+
+
+        Panel navPanel;
+        Panel inputPanel;
+        TextBox inputPanelTextBox; 
+        Panel outputPanel;
+        TextBox outputPanelTextBox;
+        int counter = 0;
 
         public MainFrame()
         {
             //InitializeComponent();
+            string json = File.ReadAllText("Properties/ButtonsDataJson.json");
+            buttons = JsonConvert.DeserializeObject<List<ButtonData>>(json);
+            evaluator = new Evaluator();
             InitilizeUI();
         }
 
         private void InitilizeUI()
-        {
-            string pathName = "Properties/OperatorJson.json";
-            var jsonData = JsonConvert.DeserializeObject<List<OperatorData>>(File.ReadAllText(pathName));            
-
-            
-
-            //offset for showing last
-            //_minWindowHeight += 50;
-            
-
+        {   
             //NavBar Panel
-            Panel navPanel = new Panel();
+            navPanel = new Panel();
             navPanel.Dock = DockStyle.Top;
             navPanel.Height = 40;
             navPanel.BackColor = Color.Red;
+            //Controls.Add(navPanel);
             panelStack.Push(navPanel);
 
-            //Output TextBox Panel
-            for (int count = 1; count <= 3; count++)
-            {
-                switch (count)
-                {
-                    case 3:
-                        CreateTextBox(Resources.Expression);
-                        continue;
-                    case 2:
-                        CreateTextBox(Resources.Input);
-                        continue;
-                    case 1:
-                        CreateTextBox(Resources.Result);
-                        continue;
-                }
-            }
+            //textbox
+            
+            inputPanel = new Panel();
+            inputPanel.Dock = DockStyle.Top;
+            inputPanel.Height = 40;
+            inputPanelTextBox = new TextBox();
+            inputPanelTextBox.BorderStyle = BorderStyle.None;
+            inputPanelTextBox.ReadOnly = true;
+            inputPanelTextBox.Dock = DockStyle.Top;
+            inputPanelTextBox.TextAlign = HorizontalAlignment.Right;
+            inputPanelTextBox.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            inputPanel.Controls.Add(inputPanelTextBox);
+            //Controls.Add(inputPanel);
+            
+            panelStack.Push(inputPanel);
+
+            outputPanel = new Panel();
+            outputPanel.Dock = DockStyle.Top;
+            outputPanel.Height = 40;
+            outputPanelTextBox = new TextBox();
+            outputPanelTextBox.BorderStyle = BorderStyle.None;
+            outputPanelTextBox.ReadOnly = true;
+            outputPanelTextBox.Dock = DockStyle.Top;
+            outputPanelTextBox.TextAlign = HorizontalAlignment.Right;
+            outputPanelTextBox.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            outputPanel.Controls.Add(outputPanelTextBox);
+            panelStack.Push(outputPanel);
+                        
 
             //Draw the Operators from the Json Library
-            TableLayoutPanel operatorTableLayout = new TableLayoutPanel();
-            operatorTableLayout.Dock = DockStyle.Top;
-            operatorTableLayout.RowCount = operatorRows;
-            operatorTableLayout.ColumnCount = _totalColumn;
-            operatorTableLayout.Size = new Size(_minWindowWidth, spaceforOperator );
-            AddOperatorButtons(jsonData, operatorTableLayout);
-            panelStack.Push(operatorTableLayout);
+            TableLayoutPanel buttonTableLayout = new TableLayoutPanel();
+            buttonTableLayout.Dock = DockStyle.Top;
+            buttonTableLayout.RowCount = buttons.Count/_totalColumn + 1;
+            buttonTableLayout.ColumnCount = _totalColumn;
+            buttonTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            buttonTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            buttonTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            buttonTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            buttonTableLayout.AutoSize = true;
+            AddButtons(buttonTableLayout);
+            panelStack.Push(buttonTableLayout);
 
-            //Draw Number Operands
-            TableLayoutPanel numberTableLayout = new TableLayoutPanel();
-            numberTableLayout.Dock = DockStyle.Top;
-            numberTableLayout.RowCount = operatorRows;
-            numberTableLayout.ColumnCount = _totalColumn;
-            numberTableLayout.Size = new Size(_minWindowWidth, _spaceForNumbers);
-            AddOperandButtons(numberTableLayout);
-            panelStack.Push(numberTableLayout);
-
-            _minWindowHeight += numberTableLayout.Height;
-
-            //calculate the dimension of the windows
-            //total height required for showing operators
-            int operatorCount = jsonData.Count;
-            operatorRows = operatorCount / _totalColumn + 1;
-            int spaceforOperator = operatorRows * (_minButtonSize + operatorTableLayout.Padding.Top + operatorTableLayout.Margin.Top);
-            _minWindowHeight += spaceforOperator;
-
-            //total height required for showing the numbers            
-            int _spaceForNumbers = _numbersRows * (_minButtonSize + numberTableLayout.Padding.Top + numberTableLayout.Margin.Top);
-            _minWindowHeight += _spaceForNumbers;
 
             //setting MainWindow 
-            this.Width = _minWindowWidth;
-            this.Height = _minWindowHeight;
+            AutoSize = true;
 
             //Draw all the panels
             DrawPanel();
-           
+
         }
 
         private void DrawPanel()
         {
-            while(panelStack.Count > 0)
+            while (panelStack.Count > 0)
             {
                 Controls.Add(panelStack.Pop());
+                
             }
         }
 
-        private void AddOperandButtons(TableLayoutPanel layout)
+        private void AddButtons(TableLayoutPanel layout)
         {
-            int number = 1;
-            for (int row = 0; row < _numbersRows; row++)
+            foreach(var buttonData in buttons)
             {
-                for (int column = 0; column < _totalColumn; column++)
+                Button button = new Button();
+                button.Text = buttonData.ButtonInfo.Name;
+                button.Click += new EventHandler(Button_click);
+                button.Dock = DockStyle.Fill;
+                layout.Controls.Add(button,buttonData.ButtonInfo.Column-1,buttonData.ButtonInfo.Row-1);
+            }            
+        }
+
+        //eventargs kya
+        private void Button_click(object sender, EventArgs e)
+        {
+            Button button = (Button) sender;
+            string buttonName = button.Text;
+            ButtonData buttonData = GetButtonData(buttonName);
+            //modify content based of operation
+            //make these in background thread
+            if(_lastPressedButton == ButtonTypeEnum.EQUAL)
+                ResetCalculator();
+
+            switch (buttonData.ButtonType)
+            {
+                case ButtonTypeEnum.EQUAL:
+                    {
+                        EvaluateResult();
+                        break;
+                    }
+                case ButtonTypeEnum.OPERATION:
+                    {
+                        PerformOperation(buttonData.OpeartorSymbol);
+                        break;
+                    }
+                case ButtonTypeEnum.OPENPARENTHASIS:
+                    {
+                        if(_lastPressedButton == ButtonTypeEnum.OPERAND)
+                        {
+                            InputString += "*";
+                        }
+                        _parenthesisCount += 1;
+                        UpdateInputExpression(buttonData.OpeartorSymbol);
+                        break;
+                    }
+                case ButtonTypeEnum.CLOSEDPARENTHASIS:
+                    {
+                        if(_parenthesisCount <= 0)
+                        {
+                            return;
+                        }
+                        _parenthesisCount -= 1;
+                        UpdateInputExpression(buttonData.OpeartorSymbol);
+                        break;
+                    }
+                case ButtonTypeEnum.FUNCTION:
+                    {
+                        _parenthesisCount += 1;
+                        UpdateInputExpression(buttonData.OpeartorSymbol + "(");
+                        break;
+                    }
+                case ButtonTypeEnum.OPERAND:
+                    {
+                        UpdateInputExpression(buttonData.OpeartorSymbol);
+                        break;
+                    }
+                case ButtonTypeEnum.OPERATOR:
+                    {
+                        UpdateInputExpression(buttonData.OpeartorSymbol); 
+                        break;
+                    }
+                
+            }
+            UpdateInputTextBox();
+            _lastPressedButton = buttonData.ButtonType;
+            
+        }
+
+        private void UpdateInputTextBox()
+        {
+            //all evaluator here
+            inputPanelTextBox.Text = InputString;
+        }
+
+        private void EvaluateResult()
+        {
+            Expression += InputString;
+            try
+            {
+                double result = evaluator.Evaluate(Expression);
+                outputPanelTextBox.Text = result.ToString();
+                Expression = "";
+            }catch(Exception ex)
+            {
+                outputPanelTextBox.Text = ex.Message;
+            }
+        }
+
+        private void ResetCalculator()
+        {
+            InputString = "";
+            inputPanelTextBox.Text = InputString;
+        }
+
+        private void PerformOperation(string opeartorSymbol)
+        {
+            if(opeartorSymbol == "del" && InputString.Length > 0)
+            {
+                InputString = InputString.Substring(0,InputString.Length - 1);
+                inputPanelTextBox.Text = InputString;                
+            }
+            else if(opeartorSymbol == "CE")
+            {
+                ResetCalculator();
+                ResultString = "";
+                outputPanelTextBox.Text = ResultString;
+            }else if(opeartorSymbol == "C")
+            {
+                InputString = "";
+
+            }
+
+        }
+
+        //if operator is clicked
+        private void UpdateInputExpression(string opeartorSymbol)
+        {
+            InputString += opeartorSymbol;
+        }
+
+        private ButtonData GetButtonData(string buttonName)
+        {
+            foreach(var button in buttons)
+            {
+                if (buttonName.Equals(button.ButtonInfo.Name))
                 {
-                    Button b = new Button();
-                    b.Size = new Size((_minWindowWidth / _totalColumn) - _offset, _minButtonSize);
-                    b.Text = (number % 11).ToString();
-                    layout.Controls.Add(b, column, row);
-                    number++;
+                    return button;
                 }
             }
-        }
-
-        private void AddOperatorButtons(List<OperatorData> operatorData,TableLayoutPanel layout)
-        {
-            int count = operatorData.Count() - 1;
-            for(int row=0; row < operatorRows; row++)
-            {
-                for(int column=0; column < _totalColumn; column++)
-                {
-                    if (count < 0) return;
-                    Button b = new Button();
-                    b.Size = new Size((_minWindowWidth / _totalColumn) - _offset ,_minButtonSize);
-                    b.Text = operatorData[count--].OperatorSymbol;
-                    layout.Controls.Add(b,column,row);
-                }
-            }
-        }
-
-        private void CreateTextBox(string v)
-        {
-            Panel expressionPanel = new Panel();
-            expressionPanel.Dock = DockStyle.Top;
-            expressionPanel.Height = 40;
-            expressionPanel.BackColor = Color.Yellow;
-            Label expressionLabel = new Label();
-            expressionLabel.Text = v;
-            expressionPanel.Controls.Add(expressionLabel);
-            TextBox expressionTextBox = new TextBox();
-            expressionTextBox.ReadOnly = true;
-            expressionTextBox.Dock = DockStyle.Top;
-            expressionTextBox.TextAlign = HorizontalAlignment.Right;
-            expressionTextBox.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            expressionPanel.Controls.Add(expressionTextBox);
-            panelStack.Push(expressionPanel);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+            return null;
+        }        
     }
 }
