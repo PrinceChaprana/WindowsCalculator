@@ -51,15 +51,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonData.cs" />
-    <Compile Include="ButtonInfo.cs" />
     <Compile Include="ButtonTypeEnum.cs" />
-    <Compile Include="CalculatorState.cs" />
+    <Compile Include="CalculatorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupTypeEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

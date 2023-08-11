@@ -1,290 +1,335 @@
 [
   {
-    "OpeartorSymbol": "sin",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "sin",
-      "Row": 1,
-      "Column": 1
-    }
-  },
-  {
-    "OpeartorSymbol": "cos",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "cos",
-      "Row": 1,
-      "Column": 2
-    }
-  },
-  {
-    "OpeartorSymbol": "tan",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "tan",
-      "Row": 1,
-      "Column": 3
-    }
-  },
-  {
-    "OpeartorSymbol": "log",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "log",
-      "Row": 1,
-      "Column": 4
-    }
-  },
-  {
-    "OpeartorSymbol": "cosec",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "cosec",
-      "Row": 2,
-      "Column": 1
-    }
-  },
-  {
-    "OpeartorSymbol": "sec",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "sec",
-      "Row": 2,
-      "Column": 2
-    }
-  },
-  {
-    "OpeartorSymbol": "cot",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "cot",
-      "Row": 2,
-      "Column": 3
-    }
-  },
-  {
-    "OpeartorSymbol": "e",
-    "ButtonType": "FUNCTION",
-    "ButtonInfo": {
-      "Name": "e",
-      "Row": 2,
-      "Column": 4
-    }
-  },
-  {
-    "OpeartorSymbol": "Custom",
+    "ButtonDescription": "Add to Memory",
     "ButtonType": "OPERATION",
-    "ButtonInfo": {
-      "Name": "custom",
-      "Row": 3,
-      "Column": 1
-    }
+    "Column": 1,
+    "GroupType": "MEMORY",
+    "Name": "Memory Add",
+    "Row": 1,
+    "Symbol": "M+"
   },
   {
-    "OpeartorSymbol": "CE",
+    "ButtonDescription": "Sub to Memory",
     "ButtonType": "OPERATION",
-    "ButtonInfo": {
-      "Name": "CE",
-      "Row": 3,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "MEMORY",
+    "Name": "Memory Sub",
+    "Row": 1,
+    "Symbol": "M-"
   },
   {
-    "OpeartorSymbol": "c",
+    "ButtonDescription": "Read to Memory",
     "ButtonType": "OPERATION",
-    "ButtonInfo": {
-      "Name": "C",
-      "Row": 3,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "MEMORY",
+    "Name": "Memory Read",
+    "Row": 1,
+    "Symbol": "MR"
   },
   {
-    "OpeartorSymbol": "del",
+    "ButtonDescription": "Clear the Memory",
     "ButtonType": "OPERATION",
-    "ButtonInfo": {
-      "Name": "Del",
-      "Row": 3,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "MEMORY",
+    "Name": "Memory Clear",
+    "Row": 1,
+    "Symbol": "MC"
   },
   {
-    "OpeartorSymbol": "%",
+    "ButtonDescription": "Save to Memory",
     "ButtonType": "OPERATION",
-    "ButtonInfo": {
-      "Name": "%",
-      "Row": 4,
-      "Column": 1
-    }
+    "Column": 5,
+    "GroupType": "MEMORY",
+    "Name": "Memory Save",
+    "Row": 1,
+    "Symbol": "MS"
   },
   {
-    "OpeartorSymbol": "(",
+    "ButtonDescription": "",
+    "ButtonType": "FUNCTION",
+    "Column": 1,
+    "GroupType": "SCIENTIFIC",
+    "Name": "sin",
+    "Row": 2,
+    "Symbol": "sin"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 2,
+    "GroupType": "SCIENTIFIC",
+    "Name": "cos",
+    "Row": 2,
+    "Symbol": "cos"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 3,
+    "GroupType": "SCIENTIFIC",
+    "Name": "tan",
+    "Row": 2,
+    "Symbol": "tan"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 4,
+    "GroupType": "SCIENTIFIC",
+    "Name": "log",
+    "Row": 2,
+    "Symbol": "log"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 1,
+    "GroupType": "SCIENTIFIC",
+    "Name": "cosec",
+    "Row": 3,
+    "Symbol": "cosec"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 2,
+    "GroupType": "SCIENTIFIC",
+    "Name": "sec",
+    "Row": 3,
+    "Symbol": "sec"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 3,
+    "GroupType": "SCIENTIFIC",
+    "Name": "cot",
+    "Row": 3,
+    "Symbol": "cot"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "FUNCTION",
+    "Column": 4,
+    "GroupType": "SCIENTIFIC",
+    "Name": "e",
+    "Row": 3,
+    "Symbol": "e"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "OPERATION",
+    "Column": 1,
+    "GroupType": "SCIENTIFIC",
+    "Name": "custom",
+    "Row": 4,
+    "Symbol": "Custom"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "OPERATION",
+    "Column": 2,
+    "GroupType": "SCIENTIFIC",
+    "Name": "CE",
+    "Row": 4,
+    "Symbol": "CE"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "OPERATION",
+    "Column": 3,
+    "GroupType": "SCIENTIFIC",
+    "Name": "C",
+    "Row": 4,
+    "Symbol": "c"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "OPERATION",
+    "Column": 4,
+    "GroupType": "SCIENTIFIC",
+    "Name": "Del",
+    "Row": 4,
+    "Symbol": "del"
+  },
+  {
+    "ButtonDescription": " ",
+    "ButtonType": "OPERATION",
+    "Column": 1,
+    "GroupType": "SCIENTIFIC",
+    "Name": "%",
+    "Row": 5,
+    "Symbol": "%"
+  },
+  {
+    "ButtonDescription": " ",
     "ButtonType": "OPENPARENTHASIS",
-    "ButtonInfo": {
-      "Name": "(",
-      "Row": 4,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "SCIENTIFIC",
+    "Name": "(",
+    "Row": 5,
+    "Symbol": "("
   },
   {
-    "OpeartorSymbol": ")",
+    "ButtonDescription": " ",
     "ButtonType": "CLOSEDPARENTHASIS",
-    "ButtonInfo": {
-      "Name": ")",
-      "Row": 4,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "SCIENTIFIC",
+    "Name": ")",
+    "Row": 5,
+    "Symbol": ")"
   },
   {
-    "OpeartorSymbol": "/",
+    "ButtonDescription": " ",
     "ButtonType": "OPERATOR",
-    "ButtonInfo": {
-      "Name": "/",
-      "Row": 4,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "SCIENTIFIC",
+    "Name": "/",
+    "Row": 5,
+    "Symbol": "/"
   },
   {
-    "OpeartorSymbol": "1",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "1",
-      "Row": 5,
-      "Column": 1
-    }
+    "Column": 1,
+    "GroupType": "STANDARD",
+    "Name": "1",
+    "Row": 6,
+    "Symbol": "1"
   },
   {
-    "OpeartorSymbol": "2",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "2",
-      "Row": 5,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "STANDARD",
+    "Name": "2",
+    "Row": 6,
+    "Symbol": "2"
   },
   {
-    "OpeartorSymbol": "3",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "3",
-      "Row": 5,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "STANDARD",
+    "Name": "3",
+    "Row": 6,
+    "Symbol": "3"
   },
   {
-    "OpeartorSymbol": "*",
+    "ButtonDescription": " ",
     "ButtonType": "OPERATOR",
-    "ButtonInfo": {
-      "Name": "X",
-      "Row": 5,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "STANDARD",
+    "Name": "X",
+    "Row": 6,
+    "Symbol": "*"
   },
   {
-    "OpeartorSymbol": "4",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "4",
-      "Row": 6,
-      "Column": 1
-    }
+    "Column": 1,
+    "GroupType": "STANDARD",
+    "Name": "4",
+    "Row": 6,
+    "Symbol": "4"
   },
   {
-    "OpeartorSymbol": "5",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "5",
-      "Row": 6,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "STANDARD",
+    "Name": "5",
+    "Row": 7,
+    "Symbol": "5"
   },
   {
-    "OpeartorSymbol": "6",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "6",
-      "Row": 6,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "STANDARD",
+    "Name": "6",
+    "Row": 7,
+    "Symbol": "6"
   },
   {
-    "OpeartorSymbol": "-",
+    "ButtonDescription": " ",
     "ButtonType": "OPERATOR",
-    "ButtonInfo": {
-      "Name": "-",
-      "Row": 6,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "STANDARD",
+    "Name": "-",
+    "Row": 7,
+    "Symbol": "-"
   },
   {
-    "OpeartorSymbol": "7",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "7",
-      "Row": 7,
-      "Column": 1
-    }
+    "Column": 1,
+    "GroupType": "STANDARD",
+    "Name": "7",
+    "Row": 8,
+    "Symbol": "7"
   },
   {
-    "OpeartorSymbol": "8",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "8",
-      "Row": 7,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "STANDARD",
+    "Name": "8",
+    "Row": 8,
+    "Symbol": "8"
   },
   {
-    "OpeartorSymbol": "9",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "9",
-      "Row": 7,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "STANDARD",
+    "Name": "9",
+    "Row": 8,
+    "Symbol": "9"
   },
   {
-    "OpeartorSymbol": "+",
+    "ButtonDescription": " ",
     "ButtonType": "OPERATOR",
-    "ButtonInfo": {
-      "Name": "+",
-      "Row": 7,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "STANDARD",
+    "Name": "+",
+    "Row": 8,
+    "Symbol": "+"
   },
   {
-    "OpeartorSymbol": "0",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "0",
-      "Row": 8,
-      "Column": 2
-    }
+    "Column": 2,
+    "GroupType": "STANDARD",
+    "Name": "0",
+    "Row": 9,
+    "Symbol": "0"
   },
   {
-    "OpeartorSymbol": "-",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": "+/-",
-      "Row": 8,
-      "Column": 1
-    }
+    "Column": 1,
+    "GroupType": "STANDARD",
+    "Name": "+/-",
+    "Row": 9,
+    "Symbol": "-"
   },
   {
-    "OpeartorSymbol": ".",
+    "ButtonDescription": " ",
     "ButtonType": "OPERAND",
-    "ButtonInfo": {
-      "Name": ".",
-      "Row": 8,
-      "Column": 3
-    }
+    "Column": 3,
+    "GroupType": "STANDARD",
+    "Name": ".",
+    "Row": 9,
+    "Symbol": "."
   },
   {
-    "OpeartorSymbol": "=",
+    "ButtonDescription": " ",
     "ButtonType": "EQUAL",
-    "ButtonInfo": {
-      "Name": "=",
-      "Row": 8,
-      "Column": 4
-    }
+    "Column": 4,
+    "GroupType": "STANDARD",
+    "Name": "=",
+    "Row": 9,
+    "Symbol": "="
   }
 ]
