@@ -4,10 +4,18 @@
     {
         OPERAND,
         OPERATOR,
-        OPERATION,
+        DELETE,
+        CLEAR,
+        CLEARENTRY,
         FUNCTION,
         OPENPARENTHASIS,
         CLOSEDPARENTHASIS,
-        EQUAL
+        EQUAL,
+        MEMORYADD,
+        MEMORYSUBTRACT,
+        MEMORYSAVE,
+        MEMORYREAD,
+        MEMORYCLEAR,
+        TYPECHANGE
     }
 }

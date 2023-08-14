@@ -8,32 +8,35 @@ using System.Windows.Forms;
 
 namespace CalculatorApplication
 {
-    public partial class MainFrame : Form
+    public partial class MainForm : Form
     {
-        public Stack<Control> panelStack = new Stack<Control>();
+        Stack<Control> panelStack = new Stack<Control>();
         //for spaceing between components
         //the gap between the table layout component
-        int _tableLayoutColumn = 1; 
-        int _tableLayoutRow;
+        int _tableLayoutColumn = 1;
 
         bool _showScientificButtons = true;
+        int _totalScientificButtons = 0;
 
-        private string Expression;
+        private List<string> Expression = new List<string>();
         private string InputString = string.Empty;
-        private string ResultString = "";
+        private string ResultString = string.Empty;
 
-        List<ButtonData> ButtonDataList;
+        List<ButtonData> _buttonDataList;
+        List<ButtonData> _memoryButtonDataList = new List<ButtonData>();
+        List<ButtonData> scientificButtonDataList = new List<ButtonData>();
+        List<ButtonData> _standardButtonDataList = new List<ButtonData>();
         Evaluator evaluator;
-        ButtonTypeEnum _lastPressedButton = ButtonTypeEnum.OPERATION;
+        //ButtonTypeEnum _lastPressedButton = ButtonTypeEnum.OPERATION;
 
         int _parenthesisCount = 0;
 
 
-        public MainFrame()
+        public MainForm()
         {
             //InitializeComponent();
             string buttonDataJsonString = File.ReadAllText("Properties/ButtonsDataJson.json");
-            ButtonDataList = JsonConvert.DeserializeObject<List<ButtonData>>(buttonDataJsonString);
+            _buttonDataList = JsonConvert.DeserializeObject<List<ButtonData>>(buttonDataJsonString);
             FetchBasicDataFromJson();
             evaluator = new Evaluator();
             InitilizeUI();
@@ -42,9 +45,29 @@ namespace CalculatorApplication
         private void FetchBasicDataFromJson()
         {
             int maxColumn = -1;
-            foreach (var buttonData in ButtonDataList)
+            foreach (var buttonData in _buttonDataList)
             {
-                maxColumn = Math.Max(maxColumn, buttonData.Column);
+                if (buttonData.GroupType != GroupTypeEnum.MEMORY)
+                    maxColumn = Math.Max(maxColumn, buttonData.Column);
+                switch (buttonData.GroupType)
+                {
+                    case GroupTypeEnum.MEMORY:
+                        {
+                            _memoryButtonDataList.Add(buttonData);
+                            break;
+                        }
+					case GroupTypeEnum.SCIENTIFIC:
+						{
+							_totalScientificButtons++; 
+                            _standardButtonDataList.Add(buttonData);
+							break;
+						}
+                    default:
+                        {
+                            _standardButtonDataList.Add(buttonData);
+                            break;
+                        }
+                }
             }
             _tableLayoutColumn = maxColumn;
         }
@@ -109,75 +132,40 @@ namespace CalculatorApplication
         //                UpdateInputExpression(buttonData.Symbol); 
         //                break;
         //            }
-                
+
         //    }
         //    UpdateInputTextBox();
         //    _lastPressedButton = buttonData.ButtonType;
-            
+
         ////}
 
         private void UpdateInputTextBox()
         {
             //all evaluator here
-            inputPanelTextBox.Text = InputString;
+            string expression = string.Empty;
+            foreach (string text in Expression)
+                expression += text;
+            inputPanelTextBox.Text = expression + InputString;
+            outputPanelTextBox.Text = ResultString;
         }
 
         private void EvaluateResult()
         {
-            Expression += InputString;
+            UpdateInputTextBox();
             try
             {
-                double result = evaluator.Evaluate(Expression);
+				string expression = string.Empty;
+				foreach (string text in Expression)
+					expression += text;
+				double result = evaluator.Evaluate(expression + InputString);
                 outputPanelTextBox.Text = result.ToString();
-                Expression = "";
-            }catch(Exception ex)
+                Expression.Clear();
+            }
+            catch (Exception ex)
             {
                 outputPanelTextBox.Text = ex.Message;
             }
         }
 
-        private void ResetCalculator()
-        {
-            InputString = "";
-            inputPanelTextBox.Text = InputString;
-        }
-
-        private void PerformOperation(string Symbol)
-        {
-            if(Symbol == "del" && InputString.Length > 0)
-            {
-                InputString = InputString.Substring(0,InputString.Length - 1);
-                inputPanelTextBox.Text = InputString;                
-            }
-            else if(Symbol == "CE")
-            {
-                ResetCalculator();
-                ResultString = "";
-                outputPanelTextBox.Text = ResultString;
-            }else if(Symbol == "C")
-            {
-                InputString = "";
-
-            }
-
-        }
-
-        //if operator is clicked
-        private void UpdateInputExpression(string opeartorSymbol)
-        {
-            InputString += opeartorSymbol;
-        }
-
-        private ButtonData GetButtonData(string buttonName)
-        {
-            foreach(var button in ButtonDataList)
-            {
-                if (buttonName.Equals(button.Name))
-                {
-                    return button;
-                }
-            }
-            return null;
-        }        
     }
 }

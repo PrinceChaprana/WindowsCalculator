@@ -1,13 +1,13 @@
 ﻿namespace CalculatorApplication
 {
-    internal class ButtonData
+    public class ButtonData
     {
-        internal string ButtonDescription { get; set; }
-        internal string ButtonType { get; set; }
-        internal int Column { get; set; }
-        internal string GroupType { get; set; }
-        internal string Name { get; set; }
-        internal int Row { get; set; }
-        internal string Symbol { get; set; }
+        public string ButtonDescription { get; set; }
+        public ButtonTypeEnum ButtonType { get; set; }
+        public int Column { get; set; }
+        public GroupTypeEnum GroupType { get; set; }
+        public string Name { get; set; }
+        public int Row { get; set; }
+        public string Symbol { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿namespace CalculatorApplication{
-    internal enum GroupTypeEnum
+    public enum GroupTypeEnum
     {
         SCIENTIFIC,
         STANDARD,
+        OPERATION,
         MEMORY
     }
 }

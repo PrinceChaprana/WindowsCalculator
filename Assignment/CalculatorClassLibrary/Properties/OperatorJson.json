@@ -37,6 +37,15 @@
   },
   {
     "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.ArthimaticOperations.PercentageOperation",
+      "OperandCount": 2,
+      "Precedence": 3,
+      "IsLeftAssociative": false
+    },
+    "OperatorSymbol": "%"
+  },
+  {
+    "operatorInfo": {
       "ClassName": "CalculatorClassLibrary.UnaryOperations.ReciprocalOperation",
       "OperandCount": 1,
       "Precedence": 3,

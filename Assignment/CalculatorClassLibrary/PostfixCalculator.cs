@@ -34,8 +34,11 @@ namespace CalculatorClassLibrary
         {
             double[] numbers;
             Stack<double> operandStack = new Stack<double>();
+            bool skipNextIteration = false;
             foreach (Token token in postfixExpression)
             {
+                if (skipNextIteration)
+                    continue;
                 switch (token.TokenType)
                 {
                     case TokenTypeEnum.OPERAND:
@@ -62,6 +65,19 @@ namespace CalculatorClassLibrary
                                     if (operandStack.Count != 0)
                                     {
                                         numbers[index] = operandStack.Peek();
+                                        if (token.Value == "%" && index == 0)
+                                        {
+                                            //3+4% = 3 + 3*4/100
+                                            //3*4% = 3*4/100
+                                            //skip to pop the character to further calculate
+                                            Token nextToken = postfixExpression[postfixExpression.IndexOf(token) + 1];
+
+											if (nextToken.Value == "*")
+                                            {
+                                                skipNextIteration = true;
+                                            }else                                                                                       
+                                                continue;
+										}
                                         operandStack.Pop();
                                     }
                                 }

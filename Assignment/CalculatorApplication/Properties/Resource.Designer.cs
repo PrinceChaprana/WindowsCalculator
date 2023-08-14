@@ -22,14 +22,14 @@ namespace CalculatorApplication.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CalculatorApplication.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CalculatorApplication.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CalculatorApplication.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,79 +61,47 @@ namespace CalculatorApplication.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to Copy.
         /// </summary>
-        internal static System.Drawing.Bitmap backspace_computer_icons_png_favpng_07FqYXWmDnmWzDyi0RAvpT5hC_removebg_preview {
+        internal static string COPY {
             get {
-                object obj = ResourceManager.GetObject("backspace-computer-icons-png-favpng-07FqYXWmDnmWzDyi0RAvpT5hC-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("COPY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expression.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
-        internal static string Expression {
+        internal static string EDIT {
             get {
-                return ResourceManager.GetString("Expression", resourceCulture);
+                return ResourceManager.GetString("EDIT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input.
+        ///   Looks up a localized string similar to Exit.
         /// </summary>
-        internal static string Input {
+        internal static string EXIT {
             get {
-                return ResourceManager.GetString("Input", resourceCulture);
+                return ResourceManager.GetString("EXIT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
-        internal static System.Drawing.Bitmap OIP_removebg_preview {
+        internal static string HELP {
             get {
-                object obj = ResourceManager.GetObject("OIP-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("HELP", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to Paste.
         /// </summary>
-        internal static System.Drawing.Bitmap R {
+        internal static string PASTE {
             get {
-                object obj = ResourceManager.GetObject("R", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Result.
-        /// </summary>
-        internal static string Result {
-            get {
-                return ResourceManager.GetString("Result", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap th {
-            get {
-                object obj = ResourceManager.GetObject("th", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap th1 {
-            get {
-                object obj = ResourceManager.GetObject("th1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("PASTE", resourceCulture);
             }
         }
     }

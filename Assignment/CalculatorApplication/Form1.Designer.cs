@@ -2,7 +2,7 @@
 
 namespace CalculatorApplication
 {
-    partial class MainFrame
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
