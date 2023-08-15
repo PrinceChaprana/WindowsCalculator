@@ -144,7 +144,7 @@
     "Symbol": "rec"
   },
   {
-    "ButtonDescription": "expontential of a number",
+    "ButtonDescription": "Natural Log",
     "ButtonType": "FUNCTION",
     "Column": 4,
     "GroupType": "SCIENTIFIC",
@@ -343,12 +343,12 @@
   },
   {
     "ButtonDescription": "ctrl+-",
-    "ButtonType": "OPERAND",
+    "ButtonType": "SIGNCHANGE",
     "Column": 1,
     "GroupType": "STANDARD",
-    "Name": "+/-",
+    "Name": "Sign Change",
     "Row": 10,
-    "Symbol": "-"
+    "Symbol": "+/-"
   },
   {
     "ButtonDescription": ".",

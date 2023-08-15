@@ -64,9 +64,7 @@
     <Compile Include="FormDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEventsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormEventsHandler.cs" />
     <Compile Include="GroupTypeEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

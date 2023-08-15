@@ -73,6 +73,8 @@
     <Compile Include="TrignometricOperations\SecOperation.cs" />
     <Compile Include="TrignometricOperations\SinOperation.cs" />
     <Compile Include="TrignometricOperations\TanOperation.cs" />
+    <Compile Include="UnaryOperations\LogOperation.cs" />
+    <Compile Include="UnaryOperations\NaturalLogOperation.cs" />
     <Compile Include="UnaryOperations\ReciprocalOpertion.cs" />
     <Compile Include="UnaryOperations\SquareOperation.cs" />
     <Compile Include="UnaryOperations\SquareRootOperation.cs" />

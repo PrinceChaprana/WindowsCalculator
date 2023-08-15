@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,25 +9,19 @@ namespace CalculatorApplication
 {
     public partial class MainForm : Form
     {
-        Stack<Control> panelStack = new Stack<Control>();
-        //for spaceing between components
-        //the gap between the table layout component
+        Stack<Control> _panelStack = new Stack<Control>();
         int _tableLayoutColumn = 1;
-
         bool _showScientificButtons = true;
         int _totalScientificButtons = 0;
 
-        private List<string> Expression = new List<string>();
-        private string InputString = string.Empty;
-        private string ResultString = string.Empty;
+        private List<string> _expression = new List<string>();
+        string _expressionString = string.Empty;
+        private string _inputString = string.Empty;
 
         List<ButtonData> _buttonDataList;
         List<ButtonData> _memoryButtonDataList = new List<ButtonData>();
-        List<ButtonData> scientificButtonDataList = new List<ButtonData>();
         List<ButtonData> _standardButtonDataList = new List<ButtonData>();
         Evaluator evaluator;
-        //ButtonTypeEnum _lastPressedButton = ButtonTypeEnum.OPERATION;
-
         int _parenthesisCount = 0;
 
 
@@ -56,12 +49,12 @@ namespace CalculatorApplication
                             _memoryButtonDataList.Add(buttonData);
                             break;
                         }
-					case GroupTypeEnum.SCIENTIFIC:
-						{
-							_totalScientificButtons++; 
+                    case GroupTypeEnum.SCIENTIFIC:
+                        {
+                            _totalScientificButtons++;
                             _standardButtonDataList.Add(buttonData);
-							break;
-						}
+                            break;
+                        }
                     default:
                         {
                             _standardButtonDataList.Add(buttonData);
@@ -72,81 +65,18 @@ namespace CalculatorApplication
             _tableLayoutColumn = maxColumn;
         }
 
-
-        ////eventargs kya
-        //private void Button_click(object sender, EventArgs e)
-        //{
-        //    Button button = (Button) sender;
-        //    string buttonName = button.Text;
-        //    ButtonData buttonData = GetButtonData(buttonName);
-        //    //modify content based of operation
-        //    //make these in background thread
-        //    if(_lastPressedButton == ButtonTypeEnum.EQUAL)
-        //        ResetCalculator();
-
-        //    switch (buttonData.ButtonType)
-        //    {
-        //        case ButtonTypeEnum.EQUAL:
-        //            {
-        //                EvaluateResult();
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.OPERATION:
-        //            {
-        //                PerformOperation(buttonData.Symbol);
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.OPENPARENTHASIS:
-        //            {
-        //                if(_lastPressedButton == ButtonTypeEnum.OPERAND)
-        //                {
-        //                    InputString += "*";
-        //                }
-        //                _parenthesisCount += 1;
-        //                UpdateInputExpression(buttonData.Symbol);
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.CLOSEDPARENTHASIS:
-        //            {
-        //                if(_parenthesisCount <= 0)
-        //                {
-        //                    return;
-        //                }
-        //                _parenthesisCount -= 1;
-        //                UpdateInputExpression(buttonData.Symbol);
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.FUNCTION:
-        //            {
-        //                _parenthesisCount += 1;
-        //                UpdateInputExpression(buttonData.Symbol + "(");
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.OPERAND:
-        //            {
-        //                UpdateInputExpression(buttonData.Symbol);
-        //                break;
-        //            }
-        //        case ButtonTypeEnum.OPERATOR:
-        //            {
-        //                UpdateInputExpression(buttonData.Symbol); 
-        //                break;
-        //            }
-
-        //    }
-        //    UpdateInputTextBox();
-        //    _lastPressedButton = buttonData.ButtonType;
-
-        ////}
-
         private void UpdateInputTextBox()
         {
             //all evaluator here
-            string expression = string.Empty;
-            foreach (string text in Expression)
-                expression += text;
-            inputPanelTextBox.Text = expression + InputString;
-            outputPanelTextBox.Text = ResultString;
+            _expressionString = string.Empty;
+            foreach (var text in _expressionItemList)
+            {
+                if (text.Value.Contains("="))
+                    continue;
+                _expressionString += text.Value;
+            }
+            _inputPanelTextBox.Text = _expressionString;
+            _outputPanelTextBox.Text = _inputString;
         }
 
         private void EvaluateResult()
@@ -154,16 +84,18 @@ namespace CalculatorApplication
             UpdateInputTextBox();
             try
             {
-				string expression = string.Empty;
-				foreach (string text in Expression)
-					expression += text;
-				double result = evaluator.Evaluate(expression + InputString);
-                outputPanelTextBox.Text = result.ToString();
-                Expression.Clear();
+                if (_openParenthesisCount > 0)
+                {
+                    _expression.Add(")");
+                }
+                double result = evaluator.Evaluate(_expressionString + _inputString);
+                _outputPanelTextBox.Text = result.ToString();
+                _inputString = result.ToString();
+                _expression.Clear();
             }
             catch (Exception ex)
             {
-                outputPanelTextBox.Text = ex.Message;
+                _outputPanelTextBox.Text = ex.Message;
             }
         }
 

@@ -133,5 +133,23 @@
       "IsLeftAssociative": false
     },
     "OperatorSymbol": "^"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.UnaryOperations.LogOperation",
+      "OperandCount": 1,
+      "Precedence": 3,
+      "IsLeftAssociative": true
+    },
+    "OperatorSymbol": "log"
+  },
+  {
+    "operatorInfo": {
+      "ClassName": "CalculatorClassLibrary.UnaryOperations.NaturalLogOperation",
+      "OperandCount": 1,
+      "Precedence": 3,
+      "IsLeftAssociative": true
+    },
+    "OperatorSymbol": "ln"
   }
 ]

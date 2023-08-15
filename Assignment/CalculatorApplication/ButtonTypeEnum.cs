@@ -16,6 +16,8 @@
         MEMORYSAVE,
         MEMORYREAD,
         MEMORYCLEAR,
-        TYPECHANGE
+        TYPECHANGE,
+        SIGNCHANGE,
+        NONE
     }
 }
